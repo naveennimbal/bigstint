@@ -248,7 +248,7 @@ class RegisterController extends AbstractActionController
         }
         
         
-        return new JsonModel($return);
+        return new ViewModel($return);
     }
 
     

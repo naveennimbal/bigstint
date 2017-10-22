@@ -78,6 +78,7 @@ class Module
             }
         }, 100);
         $eventManager->attach('dispatch', array($this, 'setLayoutVars'));
+        $eventManager->attach('dispatch', array($this, 'setBreadcrum'));
         $eventManager->attach('dispatch', array($this, 'setPaymentLayoutVars'));
         $eventManager->attach('dispatch', array($this, 'sessionVars'));
         $eventManager->attach('dispatch', array($this, 'getServices'));
@@ -317,6 +318,26 @@ class Module
         $userSession = new Container('user');
         if(isset($userSession->userDetails)){
             $target->layout()->setVariable('userDetails', $userSession->userDetails);
+        }
+
+        return;
+
+    }
+
+    public function setBreadcrum($e){
+        //$target->layout()->setVariable('name', $admin_session->name);
+        $controller      = $e->getTarget();
+        $controllerClass = get_class($controller);
+        $moduleNamespace = substr($controllerClass, 0, strpos($controllerClass, '\\'));
+        $actionArray = explode('\\', $controllerClass);
+        $action = end($actionArray);
+        //var_dump($action); exit;
+        //$action = $e->getRouteMatch()->getMatchedRouteName();
+
+        if($action=="IndexController" || $action == "RegisterController"){
+            $controller->layout()->setVariable('bread' , "false");
+        } else {
+            $controller->layout()->setVariable('bread' , "true");
         }
 
         return;

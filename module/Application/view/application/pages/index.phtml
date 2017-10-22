@@ -1,64 +1,15 @@
-<div id="content" style="min-height: 304px;">
-    <div id="title">
-        <h1 class="inner title-2"><?php echo $page->pageTitle;?>
-            <ul class="breadcrumb-inner">
-                <li> <a href="index.html">Home</a></li>
-                <li> <a href="about-us.html">About Us</a></li>
-                <li> <a href="privacy-policy.html">Privacy Policy</a></li>
-            </ul>
-        </h1>
-    </div>
-    <div class="inner">
-<?php
-//print_r($page);
-//var_dump($menu);
-
-
-?>
-        <!-- Content Inner -->
-        <div class="content-inner">
-
-            <!-- Content Center -->
-            <div class="content-center">
-                <div class="body">
-                    <div class="clear"></div>
-                    <div class="heading-l">
-                        <h2> <?php echo $page->pageTitle;?> </h2>
+<section class="about-us">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="Heading-title-left black small-heading">
+                        <h3><?php echo $page->pageTitle?></h3>
                     </div>
-
-                    <?php echo $page->content;?>
-
+                    <?php echo $page->content; ?>
                 </div>
+
             </div>
-            <!-- /Content Center -->
-
-            <!-- Content Right -->
-            <div class="content-right">
-                <div id="about-us-navigation" class="box-1">
-                    <div class="">
-                        <ul>
-
-                            <?php
-                            foreach($menu as $mnu){
-                                //var_dump($mnu);
-                                ?>
-
-                                <li><a href="<?php echo $this->url('pages',array("id"=>$mnu->page_id))?>"><?php echo $mnu->pageTitle?></a></li>
-                                <?php
-                            }
-                            ?>
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- /Content Right -->
-
-            <div class="clear"></div>
-            <!-- Clear Line -->
-
         </div>
-        <!-- /Content Inner -->
-
     </div>
-</div>
+</section>

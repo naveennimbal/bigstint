@@ -12,7 +12,7 @@
  */
  
  $dbParams = array(
-    'database'  => 'clickjobsnew',
+    'database'  => 'bigstint',
     'username'  => 'root',
     'password'  => 'root',
     'hostname'  => 'localhost'

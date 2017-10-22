@@ -9,6 +9,7 @@
 
 namespace Application\Controller;
 
+use Zend\Db\Adapter\AdapterInterface;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Model\JobseekersTable;
@@ -18,9 +19,18 @@ use Application\Model\IndustryTable;
 
 class IndexController extends AbstractActionController
 {
+     private $db;
      protected $jobseekersTable;
      protected $IndustryTable;
      protected $JobroleTable;
+
+
+
+   /* public function __construct(AdapterInterface $db)
+    {
+        $this->db = $db;
+    }*/
+
 
 
     public function getJobseekersTable() {

@@ -235,6 +235,9 @@ return array(
             'Application\Controller\Payment' => Controller\PaymentController::class,
             'Application\Controller\Backoffice' => Controller\BackofficeController::class,
         ),
+        'factories' => array(
+            'Application\Controller\Index'  => Factories\IndexControllerFactory::class,
+        ),
     ),
     'view_manager' => array(
         'display_not_found_reason' => true,

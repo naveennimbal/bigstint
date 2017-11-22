@@ -7,13 +7,14 @@ if($bread=="true") {
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-sm-7 co-xs-12 text-left">
-                    <h3>About us 2</h3>
+
+                    <h3><?php echo (isset($this->serviceName))? $this->serviceName : $controllerName;?></h3>
                 </div>
                 <div class="col-md-6 col-sm-5 co-xs-12 text-right">
                     <div class="bread">
                         <ol class="breadcrumb">
-                            <li><a href="#">Home</a></li>
-                            <li class="active">About Us</li>
+                            <li><a href="<?php echo $this->url("index")?>">Home</a></li>
+                            <li class="active"><?php echo $controllerName?></li>
                         </ol>
                     </div>
                 </div>

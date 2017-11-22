@@ -1,90 +1,87 @@
-<?php
-if(is_array($service)){
-    $service = (object)$service;
-}
-
-?>
-
-<div id="content" style="min-height: 304px;">
-    <div id="title">
-        <h1 class="inner title-2">Services
-            <ul class="breadcrumb-inner">
-                <li> <a href="<?php echo $this->url('index')?>">Home</a></li>
-                <li> <a href="<?php $this->url('service')?>">Service</a></li>
+<section class="featured-jobs">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="Heading-title black">
+                        <h1>Services</h1>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="featured-image-box">
+                        <div class="img-box"><img src="images/company/1.png" class="img-responsive center-block" alt=""></div>
+                        <div class="content-area">
+                            <div class="">
+                                <h4><a href="index3.html"> Graphic Designer </a></h4>
+                                <p> Confidential Int. Pvt. Ltd. Pakistan </p>
+                            </div>
+                            <div class="feature-post-meta">
+                                <a href="index3.html"> <i class="fa fa-clock-o"></i> 1 days ago</a> <a href="index3.html" class="mata-detail part">Part Time</a> </div>
+                            <div class="feature-post-meta-bottom"> <span>$500<small>/ month</small></span> <a href="index3.html" class="apply pull-right"> Apply Now</a> </div>
+                        </div>
+                    </div>
+                </div>
 
                 <?php
-                    if(isset($service->serviceId)){
-                        ?>
-                        <li> <a href="<?php echo  $this->url('service',array("id"=>$service->serviceId))?>"><?php echo  $service->serviceTitle?></a></li>
-                <?php
-                    }
-                ?>
 
-            </ul>
-        </h1>
-    </div>
-    <div class="inner">
-<?php
-//print_r($page);
-//var_dump($menu);
+                foreach ($service as $s ){
+                    // var_dump($s); exit;
 
 
-?>
-        <!-- Content Inner -->
-        <div class="content-inner">
-
-            <!-- Content Center -->
-            <div class="content-center boxfix ">
-                <div class="body">
-                    <div class="clear"></div>
-                    <div class="row">
-                   <?php
-
-                   foreach ($service as $s ){
-                   // var_dump($s); exit;
+                    ?>
 
 
-                        ?>
-                           <div class="col-md-4">
 
-                               <div>
-                                 <h3> <a href="<?php echo $this->url("service",array("id"=>$s['serviceId']))?>" ><?php echo $s['serviceTitle'] ?></a> </h3>
-                               </div>
-                               <div>
-
-                                   <?php
-                                   $con = strip_tags($s['content']);
-
-                                   echo "<p>";
-
-                                   echo substr($con,0,80);
-
-                                   echo "</p>";
-
-                                   ?>
-                               </div>
-
-                               <!--<div>
-                                   <?php echo $s['optionTitle'] ?>  <?php echo $s['price'] ?>
-                               </div> -->
-
-                           </div>
-                    <?php
-                    }
-                   ?>
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="featured-image-box">
+                            <div class="img-box"><img src="images/company/1.png" class="img-responsive center-block" alt=""></div>
+                            <div class="content-area">
+                                <div class="">
+                                    <h4><a href="<?php echo $this->url("service",array("id"=>$s['serviceId']))?>" ><?php echo $s['serviceTitle'] ?></a></h4>
+                                    <p> <?php echo $s['serviceTitle']?> </p>
+                                </div>
+                                <div class="feature-post-meta">
+                                    <a href="index3.html"> <i class="fa fa-clock-o"></i> 1 days ago</a> <a href="index3.html" class="mata-detail part">Part Time</a> </div>
+                                <div class="feature-post-meta-bottom"> <span>$500<small>/ month</small></span> <a href="index3.html" class="apply pull-right"> Apply Now</a> </div>
+                            </div>
+                        </div>
                     </div>
 
-                </div>
+
+
+
+
+
+                   <!-- <div class="col-md-4">
+
+                        <div>
+                            <h3>  </h3>
+                        </div>
+                        <div>
+
+                            <?php
+                            $con = strip_tags($s['content']);
+
+                          //  echo "<p>";
+
+                          //  echo substr($con,0,80);
+
+                           // echo "</p>";
+
+                            ?>
+                        </div>
+
+                        <!--<div>
+                                   <?php //echo $s['optionTitle'] ?>  <?php echo $s['price'] ?>
+                               </div>
+
+                    </div>-->
+                    <?php
+                }
+                ?>
+
+
             </div>
-            <!-- /Content Center -->
-
-
-
-            <div class="clear"></div>
-            <!-- Clear Line -->
-
         </div>
-        <!-- /Content Inner -->
-
     </div>
-</div>
+</section>

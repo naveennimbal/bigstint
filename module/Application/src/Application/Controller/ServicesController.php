@@ -118,6 +118,9 @@ class ServicesController extends AbstractActionController{
             $view->setVariables(array(
                 'service' => $service,"all"=>$all
             ));
+
+            //$this->layout()->setVariables("serviceName","Naveen");
+
             return $view;
             //return new ViewModel(array("service"=>$allService));
         }

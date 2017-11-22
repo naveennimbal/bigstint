@@ -1,153 +1,123 @@
-<?php
-/*if(is_array($service)){
-    $service = (object)$service;
-}*/
-//var_dump($service->current());
-//$title = $service->serviceTitle;
-$serviceDet = $service->current();
-?>
+<section class="about-us">
 
-<div id="content" style="min-height: 304px;">
-    <div id="title">
-        <h1 class="inner title-2"><?php echo $serviceDet['serviceTitle'];?>
-            <ul class="breadcrumb-inner">
-                <li> <a href="<?$this->basepath()?>">Home</a></li>
-                <li> <a href="<?php $this->url('service')?>">Service</a></li>
-                <li> <a href="<?php echo  $this->url('service',array("id"=>$serviceDet['serviceId']))?>"><?php echo  $serviceDet['serviceTitle']?></a></li>
-            </ul>
-        </h1>
-    </div>
-    <div class="inner">
-<?php
-//print_r($page);
-//  var_dump($service);
-
-
-?>
-        <!-- Content Inner -->
-        <div class="content-inner">
-
-            <!-- Content Center -->
-            <div class="content-center">
-                <div class="body">
-                    <div class="clear"></div>
-                    <div class="heading-l">
-                        <h2> <?php echo $serviceDet['serviceTitle'];?> </h2>
+    <?php  $serviceDet = $service->current();?>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="Heading-title black ">
+                        <h1><?php echo $serviceDet['serviceTitle']; ?> </h1>
                     </div>
-
-                    <?php echo $serviceDet['content'];?>
-
                 </div>
-            </div>
-            <!-- /Content Center -->
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <p>
+                    <?php echo $serviceDet['content']?>
+                    </p>
+                    <!--<blockquote>Lorem ipsum dolor sit amet, adipisicing elit. Veritatis maxime, perferendis nostrum. Repellat nobis aperiam rerum in modi... !</blockquote>=-->
+                </div>
 
 
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="panel-group drop-accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading tab-collapsed" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a class="collapse-controle" data-toggle="collapse" data-parent="#accordion" href="aboutus3.html#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <?php echo $serviceDet['serviceTitle'];?>
+                                        <span class="expand-icon-wrap"><i class="fa expand-icon"></i></span>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" aria-expanded="true">
+                                <form id="resform"  method="post" action="<?php echo $this->url('cart',array("action"=>"add"))?>" onsubmit="return false">
+                                    <input type="hidden" name="serviceId" id="serviceId" value="<?php echo $serviceDet['serviceId']?>">
 
-            <!--- For Price Form starts here -->
-
-
-            <div class="content-right">
-                <div id="about-us-navigation" class="box-1">
-                    <div class="">
-                        <form id="resform"  method="post" action="<?php echo $this->url('cart',array("action"=>"add"))?>" onsubmit="return false">
-                        <input type="hidden" name="serviceId" id="serviceId" value="<?php echo $serviceDet['serviceId']?>">
-                            <ul>
-                           <li style="font-weight: 900"><h4><?php echo $serviceDet['serviceTitle'];?></h4> </li>
-                            <!--<li> &nbsp;</li>-->
-                            <li>
-                                <label style="margin: auto;">
-                                    <input style="display: block !important; float: left" type="radio"
-                                           name="price" data-optiondata="<?php echo $serviceDet['serviceOptionId'] ?>-#-<?php echo $serviceDet['optionTitle'] ?>"
-                                           value="<?php echo $serviceDet['price'] ?>">
-                                    <span style="margin-left: 10px;">For <?php echo $serviceDet['optionTitle']?> Rs <?php echo $serviceDet['price']?> </span>
-                                </label>
-                            </li>
-                            <?php
-                            //var_dump($service);
-                            //echo $service->count(); exit;
-                            if($service->count() >= 1 ) {
-                                foreach ($service as $ser) {
-                                        //  var_dump($ser); exit;
-                                    //    echo $ser['optionTitle'];
-                                    ?>
                                     <li>
                                         <label style="margin: auto;">
                                             <input style="display: block !important; float: left" type="radio"
-                                                   name="price" data-optiondata="<?php echo $ser['serviceOptionId'] ?>-#-<?php echo $ser['optionTitle'] ?>"
-                                                   value="<?php echo $ser['price'] ?>">
-                                            <span style="margin: 10px;">For <?php echo $ser['optionTitle'] ?>
-                                                Rs <?php echo $ser['price'] ?></span>
+                                                   name="price" data-optiondata="<?php echo $serviceDet['serviceOptionId'] ?>-#-<?php echo $serviceDet['optionTitle'] ?>"
+                                                   value="<?php echo $serviceDet['price'] ?>">
+                                            <span style="margin-left: 10px;">For <?php echo $serviceDet['optionTitle']?> Rs <?php echo $serviceDet['price']?> </span>
                                         </label>
                                     </li>
                                     <?php
-                                }
+                                    //var_dump($service);
+                                    //echo $service->count(); exit;
+                                    if($service->count() >= 1 ) {
+                                        foreach ($service as $ser) {
+                                            //  var_dump($ser); exit;
+                                            //    echo $ser['optionTitle'];
+                                            ?>
+                                            <li>
+                                                <label style="margin: auto;">
+                                                    <input style="display: block !important; float: left" type="radio"
+                                                           name="price" data-optiondata="<?php echo $ser['serviceOptionId'] ?>-#-<?php echo $ser['optionTitle'] ?>"
+                                                           value="<?php echo $ser['price'] ?>">
+                                                    <span style="margin: 10px;"> <?php echo $ser['optionTitle'] ?>
+                                                        Rs <?php echo $ser['price'] ?></span>
+                                                </label>
+                                            </li>
+                                            <?php
+                                        }
 
-                            } else {
-                                $ser = $serviceDet;
-                                ?>
-                                <li>
-                                    <label style="margin: auto;">
-                                        <input style="display: block !important; float: left" type="radio"
-                                               name="price" data-optiondata="<?php echo $ser['serviceOptionId'] ?>-#-<?php echo $ser['optionTitle'] ?>"
-                                               value="<?php echo $ser['price'] ?>">
-                                            <!--<span style="margin-left: 10px;">For <?php echo $ser['optionTitle'] ?>
+                                    } else {
+                                        $ser = $serviceDet;
+                                        ?>
+                                        <li>
+                                            <label style="margin: auto;">
+                                                <input style="display: block !important; float: left" type="radio"
+                                                       name="price" data-optiondata="<?php echo $ser['serviceOptionId'] ?>-#-<?php echo $ser['optionTitle'] ?>"
+                                                       value="<?php echo $ser['price'] ?>">
+                                                <!--<span style="margin-left: 10px;">For <?php echo $ser['optionTitle'] ?>
                                                 Rs <?php echo $ser['price'] ?></span>-->
-                                    </label>
-                                </li>
+                                            </label>
+                                        </li>
 
 
-                            <?php
-                            }
-                            ?>
+                                        <?php
+                                    }
+                                    ?>
+                                    <li> <button style="margin: 10px" type="submit" value="Add to Cart" class="btn btn-primary" id="addToCart"> Add to Cart </button> </li>
 
-                        <li> <button style="margin: 10px" type="submit" value="Add to Cart" class="btn btn-primary" id="addToCart"> Add to Cart </button> </li>
+                                </form>
 
-                        </ul>
-                        </form>
+
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingTwo">
+                                <h4 class="panel-title">
+                                    <a class="collapse-controle collapsed" data-toggle="collapse" data-parent="#accordion" href="aboutus3.html#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Other Services
+                                        <span class="expand-icon-wrap"><i class="fa expand-icon"></i></span>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false">
+                                <div class="panel-body">
+
+                                    <ul>
+                                        <?php
+                                        foreach($all as $ser){
+                                            //var_dump($ser);
+                                            ?>
+                                            <li><a href="<?php echo $this->url('service',array("id"=>$ser['serviceId']))?>"><?php echo $ser['serviceTitle']?></a></li>
+                                            <?php
+                                        }
+                                        ?>
+
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
+
+
             </div>
-
-
-            <!--- For Price Form ends here  here -->
-
-
-<br> <br>
-
-
-            <!-- Content Right -->
-            <div class="content-right">
-                <div id="about-us-navigation" class="box-1">
-                    <div class="">
-                        <ul>
-                        <?php
-                            foreach($all as $ser){
-                                //var_dump($ser);
-                                ?>
-                                <li><a href="<?php echo $this->url('service',array("id"=>$ser['serviceId']))?>"><?php echo $ser['serviceTitle']?></a></li>
-                            <?php
-                            }
-                        ?>
-
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- /Content Right -->
-
-            <div class="clear"></div>
-            <!-- Clear Line -->
-
         </div>
-        <!-- /Content Inner -->
-
     </div>
-</div>
-<style>
-    ul label{
-        vertical-align: middle;
-        margin: auto;
-    }
-
-</style>
+</section>

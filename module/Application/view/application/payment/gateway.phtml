@@ -1,0 +1,36 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <h1 style="margin-left: 22%"> Please Wait While We Redirect You To Payement Page </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<form method="post" action="https://portal.duspay.com/processall.htm" id="duspayform">
+
+
+
+    <?php
+
+    foreach($params as $name=>$val){
+
+      ?>
+        <input type="hidden" name="<?php echo $name?>" value="<?php echo $val?>">
+
+   <?php
+    }
+
+    ?>
+
+    <script>
+
+        document.getElementById("duspayform").submit();
+    </script>
+
+
+</form>

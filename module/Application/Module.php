@@ -334,10 +334,19 @@ class Module
         //var_dump($action); exit;
         //$action = $e->getRouteMatch()->getMatchedRouteName();
 
-        if($action=="IndexController" || $action == "RegisterController"){
+        $controllerName = $e->getRouteMatch()->getMatchedRouteName();
+        //echo $controllerName;
+        // getting service name so we can genrate breadcrum
+        $controller->layout()->setVariable('controllerName' , $controllerName);
+
+
+        if($action=="IndexController" || $action == "RegisterController" || $action == "ProfileController"  ){
             $controller->layout()->setVariable('bread' , "false");
+
         } else {
             $controller->layout()->setVariable('bread' , "true");
+            ///$controller->layout()->setVariable('serviceName' , "dddd");
+
         }
 
         return;

@@ -51,7 +51,7 @@ class ProfileController extends AbstractActionController
 
 
 
-    public function indexAction()
+    /*public function indexAction()
     {
         $user_session =  new Container('user');
         $userDetail = $user_session->userDetails;
@@ -69,8 +69,14 @@ class ProfileController extends AbstractActionController
         return $view;
         //return new ViewModel(array("user"=>$userDetails));
     }
-    
-    
+    */
+
+
+    public  function indexAction()
+    {
+        return new ViewModel();
+    }
+
     private function loginCheck(){
         $user_session =  new Container('user');
         $userDetail = $user_session->userDetails;

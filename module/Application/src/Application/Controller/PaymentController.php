@@ -97,6 +97,71 @@ class PaymentController extends AbstractActionController{
         $this->redirect()->toRoute("payment",array("action"=>"login"));
     }
 
+
+
+
+    public function gatewayAction(){
+
+        $request = $this->getRequest();
+
+        //print_r($request->getPost()); exit;
+
+        $fName = $request->getPost("fname");
+        $lName = $request->getPost("lname");
+        $email = $request->getPost("email");
+        $mobile = $request->getPost("mobile");
+        $address = $request->getPost("address");
+        $city = $request->getPost("city");
+        $state = $request->getPost("state");
+        $country = $request->getPost("country");
+        $amount = $request->getPost("amount");
+
+
+        $dataArray = array();
+
+        ////Replace of 3 very important parameters * your product API code -->
+
+        $dataArray["member"] = "1147";
+        $dataArray["bid"] = "sUMwhYSzEn";
+        $dataArray["product"] = "344";
+        ////default (fixed) value * default -->
+
+        $dataArray["cardsend"] = "CHECKOUT";
+        $dataArray["action"] = "product";
+        $dataArray["mode"] = "live";
+
+        ////product price and product name * by cart total amount -->
+
+        $dataArray["price"]="1.99";
+        $dataArray["product_name"] = "Resume";
+
+        ////billing details of .* customer -->
+
+        $dataArray["ccholder"] = $fName ;
+        $dataArray["ccholder_lname"] = $lName;
+        $dataArray["email"] = $email;
+        $dataArray["bill_street_1"] =  $address;
+        $dataArray["bill_street_2"] = $address;
+        $dataArray["bill_city"] = $city;
+        $dataArray["bill_state"]= $state;
+        $dataArray["bill_country"]= $country;
+        $dataArray["bill_zip"] = "FL123";
+        $dataArray["bill_phone"]= $mobile;
+        $dataArray["id_order"] = uniqid("MR-");
+        $dataArray["notify_url"] = "http://bigstint.loc/success";
+        $dataArray["success_url"] = "http://bigstint.loc/success";
+        $dataArray["error_url"] = "http://bigstint.loc/success";
+
+        return new ViewModel(array("params"=>$dataArray));
+
+
+
+
+
+    }
+
+
+
     public function processAction()
     {
         $request = $this->getRequest();

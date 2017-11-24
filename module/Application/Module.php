@@ -223,7 +223,7 @@ class Module
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new ServiceOption());
-                    return new TableGateway('service_option', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('service_options', $dbAdapter, null, $resultSetPrototype);
                 },
                 '\Application\Model\CartTable' =>  function($sm) {
                     $tableGateway = $sm->get('CartTableGateway');

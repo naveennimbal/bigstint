@@ -7,7 +7,7 @@
                         <h1>Services</h1>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
+                <!--<div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="featured-image-box">
                         <div class="img-box"><img src="images/company/1.png" class="img-responsive center-block" alt=""></div>
                         <div class="content-area">
@@ -20,12 +20,12 @@
                             <div class="feature-post-meta-bottom"> <span>$500<small>/ month</small></span> <a href="index3.html" class="apply pull-right"> Apply Now</a> </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <?php
 
                 foreach ($service as $s ){
-                    // var_dump($s); exit;
+                   //  print_r($s); exit;
 
 
                     ?>
@@ -38,11 +38,17 @@
                             <div class="content-area">
                                 <div class="">
                                     <h4><a href="<?php echo $this->url("service",array("id"=>$s['serviceId']))?>" ><?php echo $s['serviceTitle'] ?></a></h4>
-                                    <p> <?php echo $s['serviceTitle']?> </p>
+                                    <p> <?php //echo $s['serviceTitle']
+
+
+                                        ?> </p>
                                 </div>
-                                <div class="feature-post-meta">
-                                    <a href="index3.html"> <i class="fa fa-clock-o"></i> 1 days ago</a> <a href="index3.html" class="mata-detail part">Part Time</a> </div>
-                                <div class="feature-post-meta-bottom"> <span>$500<small>/ month</small></span> <a href="index3.html" class="apply pull-right"> Apply Now</a> </div>
+                               <!-- <div class="feature-post-meta">
+                                    <a href="index3.html"> <i class="fa fa-clock-o"></i> 1 days ago</a>
+                                    <a href="index3.html" class="mata-detail part">Part Time</a>
+                                </div>-->
+                                <div class="feature-post-meta-bottom"> <span>RS. <?php echo $s['price'] ?><small></small></span>
+                                    <a href="index3.html" class="apply pull-right"> <?php echo $s['optionTitle']?></a> </div>
                             </div>
                         </div>
                     </div>

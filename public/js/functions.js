@@ -44,7 +44,8 @@ $(document).ready(function(){
             request.done(function( msg ) {
                 if(msg.status=="notLogin"){
                     //$("#loginModal").modal('show');
-                    window,location("http://"+document.location.hostname+"/"+"register/login" );
+                    alert("hi");
+                    window.location.href = window.location.origin+"/"+"register/login" ;
                 }
                 if(msg.status=="exist"){
                     $("#statusMessage").html("This Package already exist in your cart");
@@ -112,7 +113,9 @@ function addtoCart(ele){
     request.done(function( msg ) {
         if(msg.status=="notLogin"){
             //$("#loginModal").modal('show');
-            window.document.location("http://"+document.location.hostname+"/"+"register/login" );
+            alert(msg.status);
+            window.location.href("http://"+window.location.origin+"/"+"register/login" );
+
         }
         if(msg.status=="exist"){
             $("#statusMessage").html("This Package already exist in your cart");

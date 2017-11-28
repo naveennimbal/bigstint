@@ -44,7 +44,7 @@ $(document).ready(function(){
             request.done(function( msg ) {
                 if(msg.status=="notLogin"){
                     //$("#loginModal").modal('show');
-                    alert("hi");
+                    //alert("hi");
                     window.location.href = window.location.origin+"/"+"register/login" ;
                 }
                 if(msg.status=="exist"){
@@ -114,7 +114,7 @@ function addtoCart(ele){
         if(msg.status=="notLogin"){
             //$("#loginModal").modal('show');
             alert(msg.status);
-            window.location.href("http://"+window.location.origin+"/"+"register/login" );
+            window.location.href = window.location.origin+"/"+"register/login" ;
 
         }
         if(msg.status=="exist"){

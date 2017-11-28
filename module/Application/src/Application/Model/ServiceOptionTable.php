@@ -57,4 +57,13 @@ class ServiceOptionTable
         return $resultSet;
     }
 
+    public function getServiceOptionByServiceId($serviceId){
+        //$sqlString = "SELECT * FROM service_options so JOIN services se on so.serviceId = se.serviceId WHERE se.serviceId = '".$serviceId."'" ;
+        $sqlString = "SELECT * FROM service_options WHERE serviceId = '".$serviceId."'" ;
+        //var_dump($sqlString); exit;
+        $resultSet = $this->tableGateway->getAdapter()->driver->getConnection()->execute($sqlString);
+
+        return $resultSet;
+    }
+
 }

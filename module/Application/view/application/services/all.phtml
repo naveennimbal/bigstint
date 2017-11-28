@@ -25,7 +25,7 @@
                 <?php
 
                 foreach ($service as $s ){
-                   //  print_r($s); exit;
+                    // print_r($s); exit;
 
 
                     ?>
@@ -34,10 +34,10 @@
 
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="featured-image-box">
-                            <div class="img-box"><img src="images/company/1.png" class="img-responsive center-block" alt=""></div>
+                            <div class="img-box" style="background-color: #2caae1"><img src="images/company/1.png" class="img-responsive center-block" alt=""></div>
                             <div class="content-area">
                                 <div class="">
-                                    <h4><a href="<?php echo $this->url("service",array("id"=>$s['serviceId']))?>" ><?php echo $s['serviceTitle'] ?></a></h4>
+                                    <h4><a href="<?php echo $this->url("service",array("id"=>$s['service']['serviceId']))?>" ><?php echo $s['service']['serviceTitle'] ?></a></h4>
                                     <p> <?php //echo $s['serviceTitle']
 
 
@@ -47,8 +47,17 @@
                                     <a href="index3.html"> <i class="fa fa-clock-o"></i> 1 days ago</a>
                                     <a href="index3.html" class="mata-detail part">Part Time</a>
                                 </div>-->
-                                <div class="feature-post-meta-bottom"> <span>RS. <?php echo $s['price'] ?><small></small></span>
-                                    <a href="index3.html" class="apply pull-right"> <?php echo $s['optionTitle']?></a> </div>
+                                <div class="feature-post-meta-bottom" style="height: 90px; overflow: hidden;">
+                                    <span><small> <?php
+                                            //print_r($s['details']); exit;
+                                            foreach ($s['details'] as $d )
+
+                                            echo "<a href=\"".$this->url("service",array("action"=>"index","id"=>$d['serviceId']))."\" class=\"apply\"> Rs.".$d['price'] ."</a>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;<a href=\"".$this->url("service",array("action"=>"index","id"=>$d['serviceId']))."\">". $d['optionTitle']."</a><br>" ;
+
+
+                                            ?> </small></span>
+                                    <!--<a href="index3.html" class="apply pull-right"> <?php echo $s['optionTitle']?></a> -->
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -215,7 +215,7 @@ class Module
                     return new TableGateway('services', $dbAdapter, null, $resultSetPrototype);
                 },
                 '\Application\Model\ServiceOptionTable' =>  function($sm) {
-                    $tableGateway = $sm->get('ServicesOptionTableGateway');
+                    $tableGateway = $sm->get('ServiceOptionTableGateway');
                     $table = new ServiceOptionTable($tableGateway);
                     return $table;
                 },

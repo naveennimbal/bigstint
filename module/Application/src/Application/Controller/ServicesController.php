@@ -120,13 +120,20 @@ class ServicesController extends AbstractActionController{
             foreach ($service as $s){
                 $serviceAllOption[$x]['service'] = $s;
                 //$serviceAllOption[$x]['options'] = ;
-                $res = $this->getServiceOptionTable()->getServiceById($s['serviceId']);
-                print_r($res); exit;
+                $res = $this->getServiceOptionTable()->getServiceOptionByServiceId($s['serviceId']);
+
+                foreach ($res as $r){
+                   // echo $r['serviceOptionId']."<br>";
+                    $serviceAllOption[$x]['details'][] = $r;
+
+                }
+                $x++;
+
             }
 
             $view->setTemplate('application/services/all');
             $view->setVariables(array(
-                'service' => $service,"all"=>$all
+                'service' => $serviceAllOption,"all"=>$all
             ));
 
             //$this->layout()->setVariables("serviceName","Naveen");

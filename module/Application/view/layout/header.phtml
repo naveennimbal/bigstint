@@ -3,17 +3,35 @@
         <div class="row">
             <div class="col-md-7 hidden-sm hidden-xs">
                 <div class="header-top-left header-top-info">
-                    <?php if($routeName!="Profile"){?>
-                    <p><a href="tel:+3211234567"><i class="fa fa-phone"></i>+91-9999999999</a></p>
-                    <p><a href="mailto:info@jobprofiler.in"><i class="fa fa-envelope"></i>info@morganread.com</a></p>
+                    <?php if ($routeName != "Profile") { ?>
+                        <p><a href="tel:+0911165008054"><i class="fa fa-phone"></i>011-65008054</a></p>
+                        <p><a href="mailto:info@jobprofiler.in"><i class="fa fa-envelope"></i>info@morganread.com</a>
+                        </p>
                     <?php } ?>
                 </div>
             </div>
             <div class="col-md-5">
                 <div class="header-top-right pull-right header-top-info">
-                    <?php if($routeName!="Profile"){?>
-                    <p><a href="<?php echo $this->url("register",array("action"=>"login")) ?>"><i class="fa fa-lock"></i> Login </a> / <a href="<?php echo $this->url("register",array("action"=>"index")) ?>"> Register</a></p>
-                    <?php }?>
+                    <?php if ($routeName != "Profile") {
+                        if (isset($userDetails)) {
+                            //var_dump($userDetails); exit;
+
+
+                            ?>
+                            <p><a href="<?php echo $this->url("profile") ?>"><i class="fa fa-lock"></i>
+                                    Hello <?php echo ($userDetails->firstName != "" || $userDetails->firstName != null) ? ucfirst($userDetails->firstName) . " " . ucfirst($userDetails->lastName) : $userDetails->email; ?>
+                                </a></p>
+
+                            <?php
+
+                        } else {
+                            ?>
+                            <p><a href="<?php echo $this->url("register", array("action" => "login")) ?>"><i
+                                            class="fa fa-lock"></i> Login </a> / <a
+                                        href="<?php echo $this->url("register", array("action" => "index")) ?>">
+                                    Register</a></p>
+                        <?php }
+                    } ?>
                 </div>
             </div>
         </div>

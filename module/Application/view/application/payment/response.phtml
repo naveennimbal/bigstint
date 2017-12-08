@@ -4,13 +4,13 @@
 
 <div id="content" style="min-height: 304px;">
     <div id="title">
-        <h1 class="inner title-2"><?php echo $serviceDet['serviceTitle'];?>
+       <!-- <h1 class="inner title-2"><?php echo isset($serviceDet) ? $serviceDet['serviceTitle'] : "";?>
             <ul class="breadcrumb-inner">
                 <li> <a href="<?$this->basepath()?>">Home</a></li>
                 <li> <a href="<?php $this->url('cart')?>">Cart</a></li>
 
             </ul>
-        </h1>
+        </h1>  -->
     </div>
     <div class="inner">
         <?php
@@ -44,18 +44,26 @@
                     ?>
                     <br><br>
                 <?php
-                   //; var_dump($res);
+                    //print_r($res['STATUS']);
                     $msg = "";
-                    if($res["STATUS"]=="TXN_SUCCESS"){
-                    $msg == "Thanks for your payment ";
-                    } else if($res["STATUS"]=="TXN_FAILURE") {
+                   // if($res['STATUS']=="TXN_SUCCESS"){
+                   // $msg = "Thanks for your payment ";
+                    if($res["STATUS"]=="TXN_FAILURE") {
                         $msg = $res["RESPMSG"];
                     } else {
                          $msg = $res["RESPMSG"];
                     }
-                ?>
 
-                <H1 id="paymentStatus" style="padding: 100px 20px 100px 20px "> <?php   echo "Your ORDER ID is ". $res['ORDERID']."<br><br>".$msg ?> </H1>
+                    echo ($msg!="Txn Successful.")?"<h1>".$msg."</h1>": "";
+
+                if($res["STATUS"]=="TXN_SUCCESS") {
+                ?>
+                    <h1>Thanks For the payment </h1>
+                    <H1 id="paymentStatus"
+                        style="padding: 100px 20px 100px 20px "> <?php echo "Your ORDER ID is " . $res['ORDERID'];
+
+                        }
+                ?> </H1>
 
                 </div>
                 <br><br>

@@ -10,6 +10,7 @@
 namespace Application\Controller;
 
 use Zend\Db\Adapter\AdapterInterface;
+use Zend\Mvc\Application;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Application\Model\JobseekersTable;
@@ -67,8 +68,11 @@ class IndexController extends AbstractActionController
            $ret['login']=0;
        }
        $this->layout()->setVariable("login", $login);
+
+
        
        $industry = $this->getIndustryTable()->fetchAll();
+       //$industry = $indusTable->fetchAll();
        $jobrole = $this->getJobroleTable()->fetchAll();
        
         return new ViewModel(array("ret"=>$ret,"industry"=>$industry,"jobrole"=>$jobrole));

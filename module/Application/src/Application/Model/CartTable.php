@@ -53,7 +53,7 @@ class CartTable
         $sqlString = "SELECT * FROM resume_cart ";
         $sqlString .= " join services on services.serviceId=resume_cart.serviceId";
         $sqlString .= " join service_options on service_options.serviceOptionId=resume_cart.serviceOptionId";
-        $sqlString .= " where resume_cart.UserId = '".$userId."' and resume_cart.status != 1" ;
+        $sqlString .= " where resume_cart.userId = '".$userId."' and resume_cart.status != 1" ;
         //var_dump($sqlString); exit;
         $resultSet = $this->tableGateway->getAdapter()->driver->getConnection()->execute($sqlString);
 
@@ -62,7 +62,7 @@ class CartTable
     }
 
     public function getTotalCartCost($userId){
-        /*$where['UserId'] = $userId;
+        /*$where['userId'] = $userId;
         $where['status'] = 0;
         //print_r($where);
 
@@ -96,7 +96,7 @@ class CartTable
     }
 
     public function checkIfExist($data){
-        $where['UserId'] = $data['UserId'];
+        $where['userId'] = $data['userId'];
         $where['serviceId'] = $data['serviceId'] ;
         $where['serviceOptionId'] =$data['serviceOptionId'] ;
         $where['status'] = 0;
@@ -142,7 +142,7 @@ class CartTable
     public function save($data){
         $Sqldata = array(
             'cartId'=>$data->cartId,
-            'userId'=>$data->UserId,
+            'userId'=>$data->userId,
             'serviceId'=>$data->serviceId,
             'serviceOptionId'=>$data->serviceOptionId,
 
@@ -152,12 +152,12 @@ class CartTable
 
 
     public function removeCart($data){
-        //$where['UserId'] = $data['UserId'];
+        //$where['userId'] = $data['userId'];
         //$where['serviceId'] = $data['serviceId'] ;
         //$where['serviceOptionId'] =$data['serviceOptionId'] ;
         //$where['status'] = 0;
 
-        $sqlString = "DELETE FROM resume_cart where userId='".$data['UserId']."' AND serviceId='".$data['serviceId'] ."' AND serviceOptionId='".$data['serviceOptionId']."' AND status !='1'" ;
+        $sqlString = "DELETE FROM resume_cart where userId='".$data['userId']."' AND serviceId='".$data['serviceId'] ."' AND serviceOptionId='".$data['serviceOptionId']."' AND status !='1'" ;
         //var_dump($sqlString); exit;
 
         //echo  $select->getSqlString(); exit;
@@ -176,7 +176,7 @@ class CartTable
     }
 
     public function getPaymentStatus($email="",$mobile=""){
-        $select = "SELECT js.Name,js.Email,js.Mobile,rc.status,rc.dateAdded FROM jobseekers js JOIN resume_cart rc on js.UserId=rc.userId   ";
+        $select = "SELECT js.Name,js.Email,js.Mobile,rc.status,rc.dateAdded FROM jobseekers js JOIN resume_cart rc on js.userId=rc.userId   ";
 
         if($email!="" && $mobile==""){
             $select .=" WHERE js.Email = '".$email."'";

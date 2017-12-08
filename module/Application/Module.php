@@ -11,6 +11,7 @@ namespace Application;
 
 //use Application\Model\Services;
 
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\Mvc\Application;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
@@ -46,7 +47,7 @@ use Application\Model\AdminsTable;
 
 
 
-class Module 
+class Module implements ConfigProviderInterface
 {
     private $app;
     private $serviceManager;
@@ -146,7 +147,7 @@ class Module
                     return new TableGateway('users', $dbAdapter, null, $resultSetPrototype);
                 },
                 
-                 '\Application\Model\JobseekersTable' =>  function($sm) {
+               /*  '\Application\Model\JobseekersTable' =>  function($sm) {
                     $tableGateway = $sm->get('JobseekersTableGateway');
                     $table = new JobseekersTable($tableGateway);
                     return $table;
@@ -156,7 +157,7 @@ class Module
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Jobseekers());
                     return new TableGateway('jobseekers', $dbAdapter, null, $resultSetPrototype);
-                },
+                },*/
                         
                 '\Application\Model\RservicesTable' =>  function($sm) {
                     $tableGateway = $sm->get('RservicesTableGateway');
@@ -236,7 +237,7 @@ class Module
                     $resultSetPrototype->setArrayObjectPrototype(new Cart());
                     return new TableGateway('resume_cart', $dbAdapter, null, $resultSetPrototype);
                 },
-                '\Application\Model\JobseekersdetailsTable' =>  function($sm) {
+                /*'\Application\Model\JobseekersdetailsTable' =>  function($sm) {
                     $tableGateway = $sm->get('JobseekersdetailsTableGateway');
                     $table = new JobseekersdetailsTable($tableGateway);
                     return $table;
@@ -246,7 +247,7 @@ class Module
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Jobseekersdetails());
                     return new TableGateway('cj_ch_jobseekers_res_det', $dbAdapter, null, $resultSetPrototype);
-                },
+                },*/
                 '\Application\Model\PaymentTable' =>  function($sm) {
                     $tableGateway = $sm->get('PaymentTableGateway');
                     $table = new PaymentTable($tableGateway);
@@ -276,6 +277,25 @@ class Module
 
         );
     }
+
+
+    public function getControllerConfig()
+    {
+        return [
+            'factories' => [
+                Controller\IndexController::class => function($container) {
+                    return new Controller\IndexController(
+                        $container->get(Model\IndustryTable::class)
+                    );
+                },
+            ],
+        ];
+    }
+
+
+
+
+
 
 
     public function setPaymentLayoutVars($e){

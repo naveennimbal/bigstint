@@ -81,6 +81,7 @@ class RegisterController extends AbstractActionController
             // echo $request->getPost('email'); exit;
 
             $userData['email']=$request->getPost('email');
+            $userData['mobile']=$request->getPost('mobile');
             $userData['passwd']=$request->getPost('passwd');
             $userData['passwd2']=$request->getPost('passwd2');
 
@@ -203,7 +204,8 @@ class RegisterController extends AbstractActionController
                    //     'companyid' => $this->params()->fromRoute('companyid')
                    // ));
                     //echo "hello "; exit;
-                    $this->redirect()->toRoute("profile");
+                    $this->redirect()->toUrl(BASEURL."/profile");
+                    //$this->redirect()->getController("profile");
                     return;
 
 

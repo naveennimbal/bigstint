@@ -165,13 +165,26 @@ class PaymentController extends AbstractActionController{
     public function processAction()
     {
         $request = $this->getRequest();
-        $name = $request->getPost("custname");
-        $email = $request->getPost("custemail");
+        $name = $request->getPost("cname");
+        $email = $request->getPost("email");
         $amount = $request->getPost("amount");
         $mobile = $request->getPost("mobile");
         $gateway = $request->getPost("gateway");
+        $address = $request->getPost("address");
+        $city = $request->getPost("city");
+        $state = $request->getPost("state");
+        $pincode = $request->getPost("pincode");
+        $comment = $request->getPost("comment");
+        //$gateway = "paytm";
+        //$mobile = "9999999999";
+        //$email = "nav@gmail.com";
+        //$amount = "500";
+        //$name = "naveen";
+
+       // var_dump($request->getPost()); exit;
 
         if($gateway=="paytm"){
+            //var_dump($request->getPost()); exit;
 
             if ($mobile!="" && !empty($mobile) && $email!="" && !empty($email) && $amount!="" && !empty($amount)  ){
                 //$orderId=uniqid("J2N");
@@ -184,6 +197,11 @@ class PaymentController extends AbstractActionController{
                 'name'=>$name,
                 'email'=>$email,
                 'mobile'=>$mobile,
+                'address'=>$address,
+                'city'=>$city,
+                'state'=>$state,
+                'pincode'=>$pincode,
+                'comment'=>$comment,
                 'amount'=>$amount,
                 'package'=>$package,
                 'gateway'=>$gateway,
@@ -193,6 +211,7 @@ class PaymentController extends AbstractActionController{
                 'tlName'=>$tlName,
                 'agentName'=>$agentName,
                 );
+                //var_dump($data); exit;
                 $data = (object) $data;
                 $this->getPaymentTable()->addUser($data);
                 $params =  $this->paytm($mobile,$email,$amount,$orderId);
@@ -229,13 +248,13 @@ class PaymentController extends AbstractActionController{
         $paramList["MID"] = PAYTM_MERCHANT_MID;
         $paramList["ORDER_ID"] = $orderId;
         $paramList["CUST_ID"] = uniqid("Cust_");
-        $paramList["INDUSTRY_TYPE_ID"] = "Retail120";
-        $paramList["CHANNEL_ID"] = "WEB";
+        $paramList["INDUSTRY_TYPE_ID"] = INDUSTRY_TYPE_ID;
+        $paramList["CHANNEL_ID"] = CHANNEL_ID;
         $paramList["TXN_AMOUNT"] = $amount;
         $paramList["WEBSITE"] = PAYTM_MERCHANT_WEBSITE;
         $paramList["MOBILE_NO"] = $mobile;
         $paramList["EMAIL"] = $email;
-        $paramList["CALLBACK_URL"]= "http://www.jobstonaukri.loc/payment/response";
+        $paramList["CALLBACK_URL"]= "http://www.bigstint.loc/payment/response";
 
         $checkSum = $this->getChecksumFromArray($paramList,PAYTM_MERCHANT_KEY);
 

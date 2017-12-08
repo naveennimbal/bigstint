@@ -1,7 +1,7 @@
 <?php
 define("BASEURL", "http://".$_SERVER['SERVER_NAME']);
 
-define('PAYTM_ENVIRONMENT', 'PROD'); // PROD
+define('PAYTM_ENVIRONMENT', 'DEV'); // PROD
 
 
 
@@ -12,15 +12,20 @@ if (PAYTM_ENVIRONMENT == 'PROD') {
 
 if (PAYTM_ENVIRONMENT == 'PROD') {
     $PAYTM_DOMAIN = 'secure.paytm.in';
-    define('PAYTM_MERCHANT_KEY', '7pcha8fMr1uCKRcK'); //Change this constant's value with Merchant key downloaded from portal
-    define('PAYTM_MERCHANT_MID', 'FOXIES52706480784220'); //Change this constant's value with MID (Merchant ID) received from Paytm
-    define('PAYTM_MERCHANT_WEBSITE', '3foxiesweb'); //Change this constant's value with Website name received from Paytm
+    define('PAYTM_MERCHANT_KEY', 'T0xK5aXDPpdlJgiv'); //Change this constant's value with Merchant key downloaded from portal
+    define('PAYTM_MERCHANT_MID', 'KRoutS01321525245753'); //Change this constant's value with MID (Merchant ID) received from Paytm
+    define('PAYTM_MERCHANT_WEBSITE', 'KRoutSWEB'); //Change this constant's value with Website name received from Paytm
+    define('INDUSTRY_TYPE_ID', 'Retail109'); //Change this constant's value with Website name received from Paytm
+    define('CHANNEL_ID', 'WEB'); //Change this constant's value with Website name received from Paytm
 
 } else {
+   // echo "jhgjhdgjdshg"; exit;
     // for Testing Purposes
-    define('PAYTM_MERCHANT_KEY', 'miGmIS6dIloyT26I'); //Change this constant's value with Merchant key downloaded from portal
-    define('PAYTM_MERCHANT_MID', '3FOXIE03444669624368'); //Change this constant's value with MID (Merchant ID) received from Paytm
-    define('PAYTM_MERCHANT_WEBSITE', '3foxies'); //Change this constant's value with Website name received from Paytm
+    define('PAYTM_MERCHANT_KEY', 'lj6x_KqXctJA0!8O'); //Change this constant's value with Merchant key downloaded from portal
+    define('PAYTM_MERCHANT_MID', 'KRIOUT52017443355424'); //Change this constant's value with MID (Merchant ID) received from Paytm
+    define('PAYTM_MERCHANT_WEBSITE', 'WEB_STAGING'); //Change this constant's value with Website name received from Paytm
+    define('INDUSTRY_TYPE_ID', 'Retail'); //Change this constant's value with Website name received from Paytm
+    define('CHANNEL_ID', 'WEB'); //Change this constant's value with Website name received from Paytm
 
 }
 define('PAYTM_CALLBACK_URL',"http://".$_SERVER['SERVER_NAME']."/cart/response");

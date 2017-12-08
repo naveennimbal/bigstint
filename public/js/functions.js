@@ -57,6 +57,13 @@ $(document).ready(function(){
                     $("#statusModal").modal('show');
                     setTimeout("hideStatusModal()",3000);
                 }
+                if(msg.status=="exceed"){
+                    $("#statusMessage").html("Amount exceed for cart <br> Please process it then try again ");
+                    $("#statusModal").modal('show');
+                    //addCartTableRow(ele);
+                    setTimeout("hideStatusModal()",2000);
+
+                }
 
             });
 
@@ -163,14 +170,54 @@ function addCartTableRow(ele){
     serviceId = optionArray[2];
 
 
-    html = "<tr class='cartTableRow'><td class='cartTableCell'> ";
-    html += "<span style='margin-left: 1em;'>"+serviceString+"</span></td> ";
-    html += "<td class='cartTableCell'>  "+price+"</td><td class='cartTableCell'>";
-    html += "<span style='color: red'><a href='#' data-price='"+price+"' data-optiondata ='"+serviceOptionId+"-#-"+optionTitle+"-#-"+serviceId+" onclick='removePackage(this)' onclick='removePackage(this)'>X </a></span>";
-    html += "</td></td></tr>";
+   // html = "<tr class='cartTableRow'><td class='cartTableCell'> ";
+    //html += "<span style='margin-left: 1em;'>"++"</span></td> ";
+   // html += "<td class='cartTableCell'>  "+price+"</td><td class='cartTableCell'>";
+   // html += "<span style='color: red'><a href='#' data-price='"+price+"' data-optiondata ='"+serviceOptionId+"-#-"+optionTitle+"-#-"+serviceId+" onclick='removePackage(this)' onclick='removePackage(this)'>X </a></span>";
+    //html += "</td></td></tr>";
+
+
+
+    html ="<div class='serviceItem'>";
+    html +="<div class='col-md-12 col-sm-12 col-xs-12'>";
+    html +="<div class='blog-post'>";
+
+    html +="<div class='col-md-8 col-sm-8 col-xs-8'>";
+    html +="<h3 class='post-title'>";
+    html +="<a href='#'>"+serviceString+"</a>";
+    html +=optionTitle;
+    html +="</a>";
+    html +="</h3>";
+    html +="</div>";
+    html +="<div class='col-md-3 col-sm-3 col-xs-3' >";
+    html +="<h3 class='post-title'>";
+
+    html +=price;
+
+    html +="</h3>";
+    html +="</div>";
+    html +="<div class='col-md-1 col-sm-1 col-xs-1' >";
+    html +="<h4 style='color: #ab1045'>";
+    html +="<span style='color: red'>";
+    html +="<a href='#' data-optiondata ='"+serviceOptionId+"-#-"+optionTitle+"' onclick='removePackage(this)' data-price='"+price+"' >X ";
+
+    html +="</a></span>";
+
+    html +="</h4>";
+    html +="</div>";
+    html +="</div>";
+    html +="</div>";
+    html +="</div>";
+
+
+
+    $("#emptyCart").hide();
+    $("#checkoutForm").show();
+
+
 
     $('#cartTable').append(html);
-    elementRemove = $(ele).closest('tr');
+    elementRemove = $(ele).closest('.item');
     //elementRemove = $(elementRemove).closest('tr');
     //console.log(elementRemove);
     totalAmount = $("#totalAmount").text();
@@ -212,7 +259,7 @@ function removePackage(ele){
         if(msg.data.status=="success"){
             $("#statusMessage").html("Packed Removed from Cart");
             $("#statusModal").modal('show');
-            $(ele).closest('tr').hide("slow");
+            $(ele).closest('.serviceItem').hide("slow");
             setTimeout("hideStatusModal()",1000);
 
             elementRemove = $(ele).closest('tr');
@@ -222,6 +269,12 @@ function removePackage(ele){
             //console.log(totalAmount,"totalAmount");
             totalAmount = parseInt(totalAmount) -  parseInt(price);
             //console.log(price,"Price");
+            if(totalAmount == 0 ){
+                $("#emptyCart").show();
+                $("#checkoutForm").hide();
+
+            }
+
             $("#totalAmount").text(totalAmount);
             $("#totalAmountForm").val(totalAmount);
         }

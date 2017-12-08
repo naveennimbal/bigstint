@@ -73,14 +73,15 @@ class CartController extends AbstractActionController{
             $cart = new Container('cart');
             $userSession = new Container('user');
 
-            //print_r($user->userDetails); exit;
+            //print_r($userSession->userDetails); exit;
             $user = $userSession->userDetails;
-            if(!empty($user->UserId)){
+            //  print_r($user);
+            if(!empty($user->userId)){
                 $data = array();
                 $data['serviceId'] = $request->getPost('serviceId');
                 $data['serviceOptionId'] = $request->getPost('optionId');
                 $data['price'] = $request->getPost('price');
-                $data['UserId'] = $user->UserId;
+                $data['userId'] = $user->userId;
                 $ifExists = $this->getCartTable()->checkIfExist($data);
                 //var_dump($ifExists->count()); exit;
                 if($ifExists->count() == 1){
@@ -89,9 +90,10 @@ class CartController extends AbstractActionController{
                     $data = (object)$data;
                     // inserting the capping in cart
                     $totalAmount = 0;
-                    //echo $user->UserId; exit;
-                    $totalAmount = $this->getCartTable()->getTotalCartCost($user->UserId);
+                    //echo $user->userId; exit;
+                    $totalAmount = $this->getCartTable()->getTotalCartCost($user->userId);
                     if($totalAmount <= 20000){
+                        //var_dump($data); exit;
                         $ret = $this->getCartTable()->save($data);
                         $return['status']="added";
 
@@ -121,12 +123,12 @@ class CartController extends AbstractActionController{
         if ($this->getRequest()->isPost()){
             $userDeatails = new Container('user');
             $user = $userDeatails->userDetails;
-            $userId = $user->UserId;
+            $userId = $user->userId;
             $data = array();
             $data['serviceId'] = $request->getPost('serviceId');
             $data['serviceOptionId'] = $request->getPost('optionId');
             $data['price'] = $request->getPost('price');
-            $data['UserId'] = $user->UserId;
+            $data['userId'] = $user->userId;
             $deleteReturn = $this->getCartTable()->removeCart($data);
             if($deleteReturn == true ){
                 $return['status'] ="success";
@@ -145,7 +147,7 @@ class CartController extends AbstractActionController{
 
         //print_r($user->userDetails); exit;
         $user = $userSession->userDetails;
-        $cartReturn = $this->getCartTable()->getCart($user->UserId);
+        $cartReturn = $this->getCartTable()->getCart($user->userId);
         //var_dump($cartReturn->count()); exit;
         $serviceOptions = $this->getServiceTable()->getServicesByGroup();
         $serviceReturn = $this->getServiceTable()->getServices();
@@ -188,7 +190,7 @@ class CartController extends AbstractActionController{
 
     }
 
-    private function paytm($mobile,$email,$amount,$orderId,$userid){
+    private function paytm($mobile,$email,$amount,$orderId,$userId){
         /* $paramList = array(
              //"REQUEST_TYPE"=>"DEFAULT",
              "MID"=>PAYTM_MERCHANT_MID,
@@ -205,11 +207,12 @@ class CartController extends AbstractActionController{
         */
 
 
+
         $paramList["MID"] = PAYTM_MERCHANT_MID;
         $paramList["ORDER_ID"] = $orderId;
-        $paramList["CUST_ID"] = $userid;
-        $paramList["INDUSTRY_TYPE_ID"] = "Retail120";
-        $paramList["CHANNEL_ID"] = "WEB";
+        $paramList["CUST_ID"] = $userId;
+        $paramList["INDUSTRY_TYPE_ID"] = INDUSTRY_TYPE_ID;
+        $paramList["CHANNEL_ID"] = CHANNEL_ID;
         $paramList["TXN_AMOUNT"] = $amount;
         $paramList["WEBSITE"] = PAYTM_MERCHANT_WEBSITE;
         $paramList["MOBILE_NO"] = $mobile;
@@ -227,16 +230,17 @@ class CartController extends AbstractActionController{
     {
         $userSession = new Container('user');
         $userDetails = $userSession->userDetails;
-        //var_dump($userDetails->Mobile); exit;
+        //var_dump($userDetails); exit;
 
         $request = $this->getRequest();
-        $name = $userDetails->Name;
-        $email = $userDetails->Email;
+       // var_dump($request->getPost()); exit;
+        $name = $userDetails->firstName;
+        $email = $userDetails->email;
         $amount = $request->getPost("amount");
-        $mobile = $userDetails->Mobile;
+        $mobile = $userDetails->mobile;
         $gateway = $request->getPost("gateway");
         $orderId = uniqid("J2N");
-        $userId = $userDetails->UserId;
+        $userId = $userDetails->userId;
 
         $this->updateOrderId($userId,$orderId);
 
@@ -286,13 +290,13 @@ class CartController extends AbstractActionController{
          * */
 
         $SqlData = array();
-        $SqlData['userId'] = $user->UserId;
+        $SqlData['userId'] = $user->userId;
         $SqlData['status'] = $status;
         $SqlData['response'] = $_POST["RESPMSG"];
         $SqlData['responseText'] = json_encode($_POST);
 
         $where = array(
-            "userId"=>$user->UserId,
+            "userId"=>$user->userId,
             "orderId"=>$_POST["ORDERID"],
             "status"=>0
         );

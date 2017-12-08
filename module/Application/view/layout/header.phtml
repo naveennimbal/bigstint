@@ -18,9 +18,13 @@
 
 
                             ?>
-                            <p><a href="<?php echo $this->url("profile") ?>"><i class="fa fa-lock"></i>
+                            <p>
+                                <a href="<?php echo $this->url("profile") ?>"><i class="fa fa-lock"></i>
                                     Hello <?php echo ($userDetails->firstName != "" || $userDetails->firstName != null) ? ucfirst($userDetails->firstName) . " " . ucfirst($userDetails->lastName) : $userDetails->email; ?>
-                                </a></p>
+                                </a> ||
+                                <a href="<?php echo $this->url("cart") ?>">My Cart</a>
+
+                            </p>
 
                             <?php
 
@@ -31,6 +35,19 @@
                                         href="<?php echo $this->url("register", array("action" => "index")) ?>">
                                     Register</a></p>
                         <?php }
+                    } else {
+                        //if the controller is profile controller we will display the link to the cart
+                        ?>
+                        <p>
+                            <a href="<?php echo $this->url("profile") ?>"><i class="fa fa-lock"></i>
+                                Hello <?php echo ($userDetails->firstName != "" || $userDetails->firstName != null) ? ucfirst($userDetails->firstName) . " " . ucfirst($userDetails->lastName) : $userDetails->email; ?>
+                            </a> ||
+
+                            <a href="<?php echo $this->url("cart", array("action" => "index")) ?>">
+                                <i class="fa fa-lock"></i> My Cart </a></p>
+
+                        <?php
+
                     } ?>
                 </div>
             </div>

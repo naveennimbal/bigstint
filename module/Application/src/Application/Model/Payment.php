@@ -11,7 +11,7 @@ namespace Application\Model;
      public $userId;
      public $email;
      public $name;
-     //public $lastName;
+     public $address;
      public $city;
      public $state;
      public $mobile;
@@ -43,15 +43,15 @@ namespace Application\Model;
          $this->passwd = (isset($data['passwd'])) ? $data['passwd'] : "";
          $this->mobile= (isset($data['mobile'])) ? $data['mobile'] : "";
          $this->name = (isset($data['name'])) ? $data['name'] : "";
-        // $this->lastName = (isset($data['lastName'])) ? $data['lastName'] : "";
+         $this->address = (isset($data['address'])) ? $data['address'] : null;
          $this->city = (isset($data['city'])) ? $data['city'] : "";
          $this->state = (isset($data['state'])) ? $data['state'] : "";
-         $this->zip = (isset($data['zip'])) ? $data['zip'] : "";
+         $this->pincode = (isset($data['pincode'])) ? $data['pincode'] : "";
          $this->country = (isset($data['country'])) ? $data['country'] : "";
 
 
 
-         $this->status = (isset($data['status'])) ? $data['status'] : 1;
+         $this->comment = (isset($data['comment'])) ? $data['comment'] : "no comment";
          $this->status = (isset($data['status'])) ? $data['status'] : 1;
          $this->response = (isset($data['response'])) ? $data['response'] : 1;
          $this->responseText = (isset($data['responseText'])) ? $data['responseText'] : 1;
@@ -135,7 +135,7 @@ namespace Application\Model;
              ));
              
              $inputFilter->add(array(
-                 'name'     => 'zip',
+                 'name'     => 'pincode',
                  //'required' => true,
                  'filters'  => array(
                      array('name' => 'StripTags'),
@@ -194,6 +194,18 @@ namespace Application\Model;
                  ),
                  'validators' => array(
              
+                 ),
+             ));
+
+             $inputFilter->add(array(
+                 'name'     => 'address',
+                 //'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+
                  ),
              ));
 

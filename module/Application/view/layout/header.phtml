@@ -22,7 +22,8 @@
                                 <a href="<?php echo $this->url("profile") ?>"><i class="fa fa-lock"></i>
                                     Hello <?php echo ($userDetails->firstName != "" || $userDetails->firstName != null) ? ucfirst($userDetails->firstName) . " " . ucfirst($userDetails->lastName) : $userDetails->email; ?>
                                 </a> ||
-                                <a href="<?php echo $this->url("cart") ?>">My Cart</a>
+                                <a href="<?php echo $this->url("cart") ?>">My Cart</a> ||
+                                <a title="Logout" href="<?php echo $this->url("register",array("action"=>"logout"))?>"><i class="fa fa-power-off"></i></a>
 
                             </p>
 
@@ -44,7 +45,10 @@
                             </a> ||
 
                             <a href="<?php echo $this->url("cart", array("action" => "index")) ?>">
-                                <i class="fa fa-lock"></i> My Cart </a></p>
+                                <i class="fa fa-lock"></i> My Cart </a> ||
+                            <a title="Logout" href="<?php echo $this->url("register",array("action"=>"logout"))?>"><i class="fa fa-power-off"></i></a>
+
+                        </p>
 
                         <?php
 

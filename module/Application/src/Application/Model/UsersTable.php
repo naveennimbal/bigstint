@@ -45,7 +45,7 @@ class UsersTable
     {
         
         $Sqldata = array(
-            'userId'=>$data->userId,
+            //'userId'=>$data->userId,
             'email'=>$data->email,
             'firstName'=>$data->firstName,
             'lastName'=>$data->lastName,

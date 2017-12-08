@@ -204,7 +204,8 @@ class RegisterController extends AbstractActionController
                    //     'companyid' => $this->params()->fromRoute('companyid')
                    // ));
                     //echo "hello "; exit;
-                    $this->redirect()->toUrl(BASEURL."/profile");
+                    //$this->redirect()->toUrl(BASEURL."/profile");  usallu we redirect to profile but the project
+                    $this->redirect()->toUrl(BASEURL."/cart");
                     //$this->redirect()->getController("profile");
                     return;
 
@@ -229,7 +230,7 @@ class RegisterController extends AbstractActionController
         $user_session  = new Container('user');
         unset($user_session->userDetails);
         //$this->redirect()->toRoute("application",array("controller"=>"index","action"=>"index"));
-        $this->redirect()->toRoute("home");
+        $this->redirect()->toRoute("index");
     }
 
 }

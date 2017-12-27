@@ -60,7 +60,9 @@ class UsersTable
             'dateAdded'=>$data->dateAdded,
         );
         //var_dump($Sqldata); exit;
-        return $this->tableGateway->insert($Sqldata);
+        $this->tableGateway->insert($Sqldata);
+        $id = $this->tableGateway->lastInsertValue;
+        return $id;
     }
 
 
@@ -181,6 +183,13 @@ class UsersTable
 
     public function getEventImages($event_id){
         $sqlString = "Select ev.*,ei.image from events ev join event_images ei on ev.event_id = ei.event_id where ev.event_id = ".$event_id;
+        $resultSet = $this->tableGateway->getAdapter()->driver->getConnection()->execute($sqlString);
+        //var_dump($resultSet->count()); exit;
+        return $resultSet;
+    }
+
+    public function getUserById($userId ){
+        $sqlString = "SELECT users.*, user_details.* FROM users join user_details on users.userId=user_details.userId where users.userId= ".$userId;
         $resultSet = $this->tableGateway->getAdapter()->driver->getConnection()->execute($sqlString);
         //var_dump($resultSet->count()); exit;
         return $resultSet;

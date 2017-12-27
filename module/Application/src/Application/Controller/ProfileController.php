@@ -45,7 +45,7 @@ class ProfileController extends AbstractActionController
     }
     
     public function __construct() {
-       // $this->loginCheck();
+        //$this->loginCheck();
     }
 
 
@@ -74,7 +74,16 @@ class ProfileController extends AbstractActionController
 
     public  function indexAction()
     {
-        return new ViewModel();
+        $this->loginCheck();
+        $user_session =  new Container('user');
+        $userDetail = $user_session->userDetails;
+        $userId = $userDetail->userId;
+        //echo $userId ; exit;
+        $userFullDetails =  $this->getUsersTable()->getUserById($userId);
+        //var_dump($userFullDetails->current()); exit;
+        //var_dump($userFullDetails); exit;
+
+        return new ViewModel(array("userDetails"=>$userFullDetails->current()));
     }
 
     private function loginCheck(){
@@ -83,8 +92,9 @@ class ProfileController extends AbstractActionController
         if(empty($userDetail)){
            
     
-            return $this->redirect()->toRoute("application",array("controller"=>"index","action"=>"index","login"=>"0")); 
-            //return $this->redirect()->toUrl(BASEURL."/index/"); 
+            $this->redirect()->toRoute("register",array("action"=>"login","login"=>"0"));
+            //return;
+            // $this->redirect()->toUrl(BASEURL."/register/login");
             //return $this->forward()->dispatch('Application/Controller/Index',array('action' => 'index'));
         }
         return;

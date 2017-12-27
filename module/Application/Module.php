@@ -44,6 +44,8 @@ use Application\Model\Payment;
 use Application\Model\PaymentTable;
 use Application\Model\Admins;
 use Application\Model\AdminsTable;
+use Application\Model\UserDetails;
+use Application\Model\UserDetailsTable;
 
 
 
@@ -269,6 +271,17 @@ class Module implements ConfigProviderInterface
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Admins());
                     return new TableGateway('admins', $dbAdapter, null, $resultSetPrototype);
+                },
+                '\Application\Model\UserDetailsTable' =>  function($sm) {
+                    $tableGateway = $sm->get('UserDetailsTableGateway');
+                    $table = new UserDetailsTable($tableGateway);
+                    return $table;
+                },
+                'UserDetailsTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new UserDetails() );
+                    return new TableGateway('user_details', $dbAdapter, null, $resultSetPrototype);
                 },
 
 

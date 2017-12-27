@@ -12,7 +12,7 @@
                 </li>
 
                  <li><a href="<?php echo $this->url("service")?>"> Services <i class="fa fa-angle-down fa-indicator"></i></a>
-
+                    <!--<i class="fa fa-forumbee"> for bullets -->
                      <?php
                     // var_dump($serviceMenu->current()); exit;
                      ?>
@@ -23,7 +23,7 @@
                          foreach ($serviceMenu as $service ){
                              ?>
                              <li>
-                                 <a href="<?php echo $this->url("service",array("id"=>$service['serviceId']))?>"> <i class="fa fa-forumbee"></i> <?php echo ucfirst($service['serviceTitle'])?> </a>
+                                 <a href="<?php echo $this->url("service",array("id"=>$service['serviceId']))?>"> </i> <?php echo ucfirst($service['serviceTitle'])?> </a>
                              </li>
 
 
@@ -40,8 +40,6 @@
                  <li>
                      <a href="<?php echo $this->url("pages",array("id"=>"3"))?>">Contact Us</a>
                  </li>
-
-
 
             </ul>
         </div>

@@ -28,6 +28,7 @@ class RegisterController extends AbstractActionController
 
 
     protected $usersTable;
+    protected $usersDetailsTable;
 
 
 
@@ -37,6 +38,13 @@ class RegisterController extends AbstractActionController
             $this->usersTable = $sm->get('\Application\Model\UsersTable');
         }
         return $this->usersTable;
+    }
+    public function getUsersDetailsTable() {
+        if (!$this->usersDetailsTable) {
+            $sm = $this->getServiceLocator();
+            $this->usersDetailsTable = $sm->get('\Application\Model\UserDetailsTable');
+        }
+        return $this->userDetailsTable;
     }
 
 
@@ -92,7 +100,14 @@ class RegisterController extends AbstractActionController
 
                     $user->exchangeArray($userData);
                     //$userData = (object)$userData;
-                    if ($this->getUsersTable()->save($user)) {
+                    $userId = $this->getUsersTable()->save($user);
+                    if ($userId) {
+                        $details = array();
+                        $details['userId'] =  $userId;
+                        $userDetails = new \Application\Model\UserDetails();
+                        $userDetails->exchangeArray($details);
+                        //echo "hi"; exit;
+                        $this->getUsersDetailsTable()->save($userDetails);
                         return new ViewModel(array("result" => "success"));
                     } else {
                         return new ViewModel(array("result" => "fail"));

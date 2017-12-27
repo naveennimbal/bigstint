@@ -19,7 +19,7 @@ namespace Application\Model;
      public $passwd;
      public $status;
      public $dateAdded;
-          
+
      protected $inputFilter;
     
      /*
@@ -44,7 +44,7 @@ namespace Application\Model;
 
          $this->status = (isset($data['status'])) ? $data['status'] : 1;
          $this->dateAdded = (isset($data['dateAdded'])) ? $data['dateAdded'] : date('Y-m-d');
-          
+
      }
 
      public function setInputFilter(InputFilterInterface $inputFilter)
@@ -116,7 +116,7 @@ namespace Application\Model;
 
                  ),
              ));
-             
+
              $inputFilter->add(array(
                  'name'     => 'zip',
                  //'required' => true,
@@ -125,11 +125,11 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-             
+
                  ),
              ));
-             
-             
+
+
              $inputFilter->add(array(
                  'name'     => 'city',
                  //'required' => true,
@@ -138,10 +138,10 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-             
+
                  ),
              ));
-             
+
              $inputFilter->add(array(
                  'name'     => 'state',
                  //'required' => true,
@@ -150,10 +150,10 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                      
+
                  ),
              ));
-             
+
              $inputFilter->add(array(
                  'name'     => 'country',
                  //'required' => true,
@@ -162,12 +162,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                      
+
                  ),
              ));
-             
 
-             
+
+
              $inputFilter->add(array(
                  'name'     => 'mobile',
                  //'required' => true,
@@ -176,7 +176,7 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-             
+
                  ),
              ));
 
@@ -205,7 +205,7 @@ namespace Application\Model;
              
                  ),
              ));
-             
+
 
              $this->inputFilter = $inputFilter;
          }

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>JobstoNaukri Backoffice</title>
+    <title>Jobsa&Naukri Sales</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo $this->basepath('backofficefiles/css/bootstrap.min.css')?>" rel="stylesheet">
@@ -19,6 +20,8 @@
 
     <!-- Morris Charts CSS -->
     <link href="<?php echo $this->basepath('backofficefiles/css/plugins/morris.css')?>" rel="stylesheet">
+    <!--multi select-->
+    <link href="<?php echo $this->basepath('backofficefiles/css/jquery.multiselect.css')?>" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="<?php echo $this->basepath('backofficefiles/font-awesome/css/font-awesome.min.css')?>" rel="stylesheet" type="text/css">
@@ -46,7 +49,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">JobstoNaukri Backoffice</a>
+                <a class="navbar-brand" href="<?php echo $this->url('sales');?>">Jobs&Naukri Sales</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -153,22 +156,16 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href="<?php echo $this->url('sales')?>"><i class="fa fa-fw fa-dashboard"></i> Sales Home</a>
                     </li>
                     <li>
-                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Jobseekers</a>
+                        <a href="<?php echo $this->url("roles",array("action"=>"index"))?>"><i class="fa fa-fw fa-bar-chart-o"></i> Roles</a>
                     </li>
                     <li>
-                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Employers</a>
+                        <a href="<?php echo $this->url("emp",array("action"=>"index"))?>"><i class="fa fa-fw fa-table"></i> Employees</a>
                     </li>
                     <li>
-                        <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Jobs</a>
-                    </li>
-                    <li>
-                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Resumes </a>
-                    </li>
-                    <li>
-                        <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Consultants</a>
+                        <a href="<?php echo $this->url("cust",array("action"=>"index"))?>"><i class="fa fa-fw fa-edit"></i> Customers</a>
                     </li>
 
                 </ul>
@@ -196,6 +193,9 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo $this->basepath('backofficefiles/js/bootstrap.min.js')?>"></script>
+
+    <!-- multiselect -->
+    <script src="<?php echo $this->basepath('backofficefiles/js/jquery.multiselect.js')?>"></script>
 
     <!-- Morris Charts JavaScript -->
     <script src="<?php echo $this->basepath('backofficefiles/js/plugins/morris/raphael.min.js')?>"></script>

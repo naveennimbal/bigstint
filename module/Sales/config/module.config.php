@@ -57,6 +57,53 @@ return array(
                     ),
                 ),
             ),
+
+            'roles' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/sales/roles[/][:action][/:id]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Sales\Controller\Roles',
+                        'action' => 'index',
+                    ),
+                ),
+            ),
+            'emp' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/sales/emp[/][:action][/:id]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Sales\Controller\Emp',
+                        'action' => 'index',
+                    ),
+                ),
+            ),
+            'cust' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/sales/cust[/][:action][/:id]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Sales\Controller\Cust',
+                        'action' => 'index',
+                    ),
+                ),
+            ),
+
         ),
     ),
     'service_manager' => array(
@@ -76,7 +123,10 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Sales\Controller\Index' => 'Sales\Controller\IndexController'
+            'Sales\Controller\Index' => 'Sales\Controller\IndexController',
+            'Sales\Controller\Roles' => 'Sales\Controller\RolesController',
+            'Sales\Controller\Emp' => 'Sales\Controller\EmpController',
+            'Sales\Controller\Customer' => 'Sales\Controller\CustController'
         ),
     ),
     'view_manager' => array(
@@ -93,6 +143,7 @@ return array(
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
+            'zenddevelopertools' => __DIR__ . '/../view',
         ),
     ),
 );

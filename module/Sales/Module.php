@@ -5,6 +5,10 @@ namespace Sales;
 
 
 
+use Sales\Model\Customer;
+use Sales\Model\CustomerTable;
+use Sales\Model\Employees;
+use Sales\Model\EmployeesTable;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Zend\Session\Config\SessionConfig;
@@ -86,20 +90,53 @@ class Module
     public function getServiceConfig()
     {
         return array(
-          /*  'factories' => array(
-                '\Application\Model\PaymentTable' =>  function($sm) {
-                    $tableGateway = $sm->get('PaymentTableGateway');
-                    $table = new PaymentTable($tableGateway);
+            'factories' => array(
+                '\Sales\Model\CustomerTable' =>  function($sm) {
+                    $tableGateway = $sm->get('CustomerTableGateway');
+                    $table = new CustomerTable($tableGateway);
                     return $table;
                 },
-                'PaymentTableGateway' => function ($sm) {
+                'CustomerTableGateway' => function ($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Payment());
-                    return new TableGateway('payment', $dbAdapter, null, $resultSetPrototype);
+                    $resultSetPrototype->setArrayObjectPrototype(new Customer());
+                    return new TableGateway('customers', $dbAdapter, null, $resultSetPrototype);
+                },
+                '\Sales\Model\SalesTable' =>  function($sm) {
+                    $tableGateway = $sm->get('SalesTableGateway');
+                    $table = new SalesTable($tableGateway);
+                    return $table;
+                },
+                'SalesTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Sales());
+                    return new TableGateway('sales', $dbAdapter, null, $resultSetPrototype);
+                },
+                '\Sales\Model\RolesTable' =>  function($sm) {
+                    $tableGateway = $sm->get('RolesTableGateway');
+                    $table = new RolesTable($tableGateway);
+                    return $table;
+                },
+                'RolesTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Roles());
+                    return new TableGateway('roles', $dbAdapter, null, $resultSetPrototype);
+                },
+                '\Sales\Model\EmployeesTable' =>  function($sm) {
+                    $tableGateway = $sm->get('EmployeesTableGateway');
+                    $table = new EmployeesTable($tableGateway);
+                    return $table;
+                },
+                'EmployeesTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Employees());
+                    return new TableGateway('employees', $dbAdapter, null, $resultSetPrototype);
                 },
             )
-          */
+
         );
     }
 

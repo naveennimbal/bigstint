@@ -46,6 +46,8 @@ define('MAIL_PASSWORD', "naveen");
 define('MAIL_CONNECTION', "ssl");
 define('MAIL_PORT', "465");
 
+define('REQUEST_MICROTIME', microtime(true));
+
 
 
 

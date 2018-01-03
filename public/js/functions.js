@@ -334,3 +334,17 @@ $("#paymentForm").submit(function(){
         alert("Please accept Terms and Conditions");
     }
 });
+
+
+$(function () {
+    $('#services').multiselect({
+        columns: 3,
+        placeholder: 'Select Services',
+        search: true,
+        searchOptions: {
+            'default': 'Search States'
+        },
+        selectAll: true
+    });
+
+});

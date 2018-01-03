@@ -5,7 +5,7 @@ namespace Sales\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class IndexController extends AbstractActionController
+class CustController extends AbstractActionController
 {
 
     protected $cartTable;
@@ -51,22 +51,6 @@ class IndexController extends AbstractActionController
 
     public function addAction()
     {
-        //$layoutName = $this->layout()->getTemplate();
-        //echo $layoutName; exit;
-        $ser = $this->getServiceTable()->getServices();
-        $services= array();
-        $x=0;
-        //var_dump($services);
-        foreach ($ser as $service){
-            $services[$x]['id'] = $service['serviceId'];
-
-            $name = $service['serviceTitle'];
-            if($service['optionTitle']!="" || $service['optionTitle']!=null ){
-                $name = $service['serviceTitle']."(".$service['optionTitle'].")";
-            }
-            $services[$x]['name'] = $name;
-            $x++;
-        }
 
 
 

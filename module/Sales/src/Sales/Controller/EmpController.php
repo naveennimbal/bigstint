@@ -5,21 +5,18 @@ namespace Sales\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class IndexController extends AbstractActionController
+class EmpController extends AbstractActionController
 {
 
     protected $cartTable;
     protected $serviceTable;
     protected $paymentTable;
+    protected $empTable;
+    protected $rolesTable;
 
 
-    public function getPaymentTable() {
-        if (!$this->paymentTable) {
-            $sm = $this->getServiceLocator();
-            $this->paymentTable = $sm->get('\Application\Model\PaymentTable');
-        }
-        return $this->paymentTable;
-    }
+
+
 
 
 
@@ -39,6 +36,22 @@ class IndexController extends AbstractActionController
         return $this->serviceTable;
     }
 
+    public function getEmpTable() {
+        if (!$this->empTable) {
+            $sm = $this->getServiceLocator();
+            $this->empTable = $sm->get('\Sales\Model\EmployeesTable');
+        }
+        return $this->empTable;
+    }
+
+    public function getRolesTable() {
+        if (!$this->rolesTable) {
+            $sm = $this->getServiceLocator();
+            $this->rolesTable = $sm->get('\Sales\Model\RolesTable');
+        }
+        return $this->rolesTable;
+    }
+
 
     public function indexAction()
     {
@@ -51,26 +64,32 @@ class IndexController extends AbstractActionController
 
     public function addAction()
     {
-        //$layoutName = $this->layout()->getTemplate();
-        //echo $layoutName; exit;
-        $ser = $this->getServiceTable()->getServices();
-        $services= array();
-        $x=0;
-        //var_dump($services);
-        foreach ($ser as $service){
-            $services[$x]['id'] = $service['serviceId'];
 
-            $name = $service['serviceTitle'];
-            if($service['optionTitle']!="" || $service['optionTitle']!=null ){
-                $name = $service['serviceTitle']."(".$service['optionTitle'].")";
-            }
-            $services[$x]['name'] = $name;
+        $rol = $this->getRolesTable()->fetchAll();
+        $roles = array();
+        $x=0;
+
+        foreach ($rol as $role){
+            $roles[$x]['id']= $role['roleId'];
+            $roles[$x]['name']= $role['roleName'];
+            $x++;
+        }
+
+        $tl = $this->getEmpTable()->getTeamLeaders();
+        $teamLeaders = array();
+        $x=0;
+        foreach ($tl as $emp){
+            var_dump($emp); exit;
+
+            $teamLeaders[$x]['id']= $emp['empId'];
+            $teamLeaders[$x]['name']= $emp['name'];
             $x++;
         }
 
 
 
-        return new ViewModel(array("result"=>array(),"services"=>$services));
+
+        return new ViewModel(array("result"=>array(),"roles"=>$roles));
 
     }
 

@@ -54,7 +54,7 @@ class CustController extends AbstractActionController
 
 
 
-        return new ViewModel(array("result"=>array(),"services"=>$services));
+        return new ViewModel(array("result"=>array(),"services"=>""));
 
     }
 
@@ -67,8 +67,6 @@ class CustController extends AbstractActionController
             $mobile = $request->getPost('mobile');
 
             $result = $this->getCartTable()->getPaymentStatus($email,$mobile);
-
-
 
             return new ViewModel(array("result"=>$result,"count"=>$count));
         }

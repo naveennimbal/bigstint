@@ -27,6 +27,9 @@ class Sales implements InputFilterAwareInterface
     public $empId;
     public $custId;
     public $amount;
+    public $isFresh;
+    public $transId;
+    public $gateway;
     public $status;
     public $dateAdded;
     public $dateUpdated;
@@ -38,6 +41,9 @@ class Sales implements InputFilterAwareInterface
         $this->empId = (isset($data['empId'])) ? $data['empId'] : null;
         $this->custId = (isset($data['custId'])) ? $data['custId'] : null;
         $this->amount = (isset($data['amount'])) ? $data['amount'] : null;
+        $this->isFresh = (isset($data['isFresh'])) ? $data['isFresh'] : null;
+        $this->transId = (isset($data['transId'])) ? $data['transId'] : null;
+        $this->gateway = (isset($data['gateway'])) ? $data['gateway'] : null;
         $this->status = (isset($data['status'])) ? $data['status'] : null;
         $this->dateAdded = (isset($data['dateAdded'])) ? $data['dateAdded'] : date('Y-M-d H:i:s');
         $this->dateUpdated = (isset($data['dateUpdated'])) ? $data['dateUpdated'] : date('Y-M-d H:i:s');

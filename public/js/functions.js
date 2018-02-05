@@ -347,4 +347,23 @@ $(function () {
         selectAll: true
     });
 
+
+
+    $("#role").change(function () {
+        val = $(this).val();
+        if(val==2){
+            $("#tldiv").hide();
+        } else {
+            $("#tldiv").show();
+        }
+
+    })
+
+
+    $("#addSaleForm").submit(function(){
+
+    })
+
+
+
 });

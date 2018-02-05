@@ -21,8 +21,13 @@ if (PAYTM_ENVIRONMENT == 'PROD') {
 } else {
    // echo "jhgjhdgjdshg"; exit;
     // for Testing Purposes
-    define('PAYTM_MERCHANT_KEY', 'lj6x_KqXctJA0!8O'); //Change this constant's value with Merchant key downloaded from portal
-    define('PAYTM_MERCHANT_MID', 'KRIOUT52017443355424'); //Change this constant's value with MID (Merchant ID) received from Paytm
+    //define('PAYTM_MERCHANT_KEY', 'lj6x_KqXctJA0!8O'); //Change this constant's value with Merchant key downloaded from portal
+    //define('PAYTM_MERCHANT_MID', 'KRIOUT52017443355424'); //Change this constant's value with MID (Merchant ID) received from Paytm
+    //define('PAYTM_MERCHANT_WEBSITE', 'WEB_STAGING'); //Change this constant's value with Website name received from Paytm
+    //define('INDUSTRY_TYPE_ID', 'Retail'); //Change this constant's value with Website name received from Paytm
+    //define('CHANNEL_ID', 'WEB'); //Change this constant's value with Website name received from Paytm
+    define('PAYTM_MERCHANT_KEY', 'qHa_dK!xP!Hc!ohA'); //Change this constant's value with Merchant key downloaded from portal
+    define('PAYTM_MERCHANT_MID', 'peerle10918142897342'); //Change this constant's value with MID (Merchant ID) received from Paytm
     define('PAYTM_MERCHANT_WEBSITE', 'WEB_STAGING'); //Change this constant's value with Website name received from Paytm
     define('INDUSTRY_TYPE_ID', 'Retail'); //Change this constant's value with Website name received from Paytm
     define('CHANNEL_ID', 'WEB'); //Change this constant's value with Website name received from Paytm

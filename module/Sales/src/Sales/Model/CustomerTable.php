@@ -73,7 +73,9 @@ class CustomerTable
             'dateAdded'=>$data->dateAdded,
             'dateUpdated'=>$data->dateUpdated,
         );
-        return $this->tableGateway->insert($Sqldata);
+         $this->tableGateway->insert($Sqldata);
+        $id = $this->tableGateway->lastInsertValue;
+        return $id;
     }
 
     public function update($data)
@@ -96,11 +98,31 @@ class CustomerTable
 
 
 
-    public function getUserDetails($userId){
+    public function getCustbyMobileOrEmail($mobile=null , $email = null){
         $sql = new Sql($this->tableGateway->adapter);
         $select = $sql->select();
         $select->from($this->tableGateway->getTable());
-        $select->where(array("userId"=>$userId));
+        if($mobile!=null) {
+            $select->where(array("custMobile" => $mobile));
+        }
+        elseif($email != null ){
+            $select->where(array("custEmail" => $email));
+        }
+        elseif ($mobile==null && $email==null){
+            return null ;
+        }
+
+        //echo $select->getSqlString(); exit;
+
+        $resultSet = $this->tableGateway->selectWith($select);
+        return  $resultSet->current();
+    }
+
+    public function getCustById($custId){
+        $sql = new Sql($this->tableGateway->adapter);
+        $select = $sql->select();
+        $select->from($this->tableGateway->getTable());
+        $select->where(array("custId" => $custId));
         $resultSet = $this->tableGateway->selectWith($select);
         return  $resultSet->current();
     }

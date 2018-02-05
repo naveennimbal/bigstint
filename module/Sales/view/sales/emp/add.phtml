@@ -2,12 +2,35 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Sales
+            Employee
         </h1>
         <ol class="breadcrumb">
             <li class="active">
-                <i class="fa fa-dashboard"></i> All Sales
+                <i class="fa fa-dashboard"></i> Add Employee
             </li>
+            <?php
+            if(isset($result)){
+                if($result=="success"){
+                    ?>
+                    <div class="alert alert-success">
+                        <strong>Success!</strong> Employee Sucessfully Added
+                    </div>
+
+                    <?php
+                }
+                if($result=="fail"){
+                    ?>
+                    <div class="alert alert-danger">
+                        <strong>Error!</strong>
+                        <?php echo (isset($error))? $error : "Something went wrong Try again"?>
+                    </div>
+                    <?php
+                }
+                ?>
+
+            <?php
+            }
+            ?>
         </ol>
     </div>
 </div>
@@ -18,7 +41,7 @@
 <div class="row">
     <div class="col-lg-12 col-md-6">
 
-        <form role="form" method="post" id="confirmPaymentForm" action="<?php echo  $this->url("sales",array("controller"=>"index","action"=>"confirm")) ?>">
+        <form role="form" method="post" id="confirmPaymentForm" action="<?php echo  $this->url("emp",array("controller"=>"emp","action"=>"add")) ?>">
 
             <div class="col-lg-10">
 
@@ -37,18 +60,25 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Salary</label>
-                    <input class="form-control" type="text" placeholder="Amount " name="salary">
+                    <label>Target</label>
+                    <input class="form-control" type="text" placeholder="Employee Target " name="target">
                 </div>
 
+
                 <div class="form-group">
+                    <label>Salary</label>
+                    <input class="form-control" type="text" placeholder="Salary" name="salary">
+                </div>
+
+                <div class="form-group" >
                     <label>Team Role</label>
                     <select class="form-control" name="role"  id="role">
                         <option value=""> Select Role</option>
                         <?php
                          foreach ($roles as $role){
+                             //var_dump($role); exit;
                              ?>
-                             <option value="<?php echo $role['id']?>"> <?php echo $role['roleName']?></option>
+                             <option value="<?php echo $role['id']?>"> <?php echo $role['name']?></option>
                         <?php
                          }
                         ?>
@@ -58,12 +88,16 @@
 
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" id="tldiv">
                     <label>Team Leader</label>
-                    <select class="form-control" name="parent" multiple="multiple" id="parent">
-                        <option value=""> Select Services</option>
+                    <select class="form-control" name="parent" id="parent">
+                        <option value=""> Select Team Leader</option>
                         <?php
-                       // foreach ()
+                        foreach ($tl as $leader){
+                            ?>
+                            <option value="<?php echo $leader['id']?>"> <?php echo $leader['name']?></option>
+                        <?php
+                        }
                         ?>
 
                     </select>
@@ -72,8 +106,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Agent</label>
-                    <input class="form-control" type="text" placeholder="Amount " name="Agent">
+                    <input type="submit" value="Add Employee" class="btn btn-primary">
                 </div>
 
 
@@ -93,67 +126,4 @@
 
 </div>
 <!-- /.row -->
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Sale Search List </h3>
-            </div>
-
-
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Mobile</th>
-                        <th>Date Time </th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    <?php
-                    // if($result->count() > 0) {
-                    foreach ($result as $res) {
-                        var_dump($res); exit;
-                        ?>
-
-                        <tr class="active">
-                            <td>Atul Walkar</td>
-                            <td>shrawan.walkar@gmail.com</td>
-                            <td>99225515752 9595674545</td>
-                            <td>29/07/2016 <br>30/07/2016</td>
-                            <td>Active</td>
-                        </tr>
-
-
-                        <?php
-                    }
-                    // } else
-                    {
-                        ?>
-
-                        <tr class="active">
-                            <td colspan="5">Nothing Found</td>
-
-                        </tr>
-
-                        <?php
-                    }
-
-                    ?>
-
-
-                    </tbody>
-                </table>
-
-
-
-            </div>
-        </div>
-    </div>
-    <!-- /.row -->
 

@@ -77,34 +77,35 @@
                         <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Email</th>
-                            <th>Mobile</th>
+                            <th>Amount</th>
+                            <!--<th>Mobile</th>-->
                             <th>Date Time </th>
-                            <th>Status</th>
+                            <th>Fresh / Upsale</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         <?php
-                       // if($result->count() > 0) {
-                            foreach ($result as $res) {
-                                var_dump($res); exit;
+                        //echo "<pre>";
+                         // var_dump(count($paginator->getTotalItemCount())); exit;
+                        if($count>0) {
+                            foreach ($paginator as $res) {
+                                //echo "<pre>";
+                                //var_dump($res); exit;
                                 ?>
 
                                 <tr class="active">
-                                    <td>Atul Walkar</td>
-                                    <td>shrawan.walkar@gmail.com</td>
-                                    <td>99225515752 9595674545</td>
-                                    <td>29/07/2016 <br>30/07/2016</td>
-                                    <td>Active</td>
+                                    <td><?php echo $res->custName?></td>
+                                    <td><?php echo $res->amount?></td>
+                                    <td><?php echo date("d-m-Y H:i:s",strtotime($res->dateAdded)) ?></td>
+                                    <td><?php echo ($res->isFresh==1)?"Fresh":"Upsale"?></td>
+
                                 </tr>
 
 
                                 <?php
                             }
-                       // } else
-                        {
-                            ?>
+                        } else { ?>
 
                             <tr class="active">
                                 <td colspan="5">Nothing Found</td>
@@ -120,6 +121,24 @@
                         </tbody>
                     </table>
 
+                    <div class="row">
+                        <?php
+                        // add at the end of the file after the table
+                        echo $this->paginationControl(
+                        // the paginator object
+                            $this->paginator,
+                            // the scrolling style
+                            'sliding',
+                            // the partial to use to render the control
+                            'partial/page.phtml',
+                            // the route to link to when a user clicks a control link
+                            array(
+                               // 'route' => 'sales'
+                            )
+                        );
+                        ?>
+
+                    </div>
 
 
         </div>

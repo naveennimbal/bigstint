@@ -53,7 +53,7 @@
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-                <li class="dropdown">
+                <!--<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu message-dropdown">
                         <li class="message-preview">
@@ -78,7 +78,7 @@
                                         <img class="media-object" src="http://placehold.it/50x50" alt="">
                                     </span>
                                     <div class="media-body">
-                                        <h5 class="media-heading"><strong>Adminstrator</strong>
+                                        <h5 class="media-heading"><strong><?php //echo $this->name; ?></strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -132,11 +132,11 @@
                             <a href="#">View All</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Adminstrator<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo  ucfirst($this->empName); //(isset($this->name))?$this->name :"No One" ?> (<?php echo $this->roleName?>) <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li>
+                       <!-- <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
                         <li>
@@ -145,9 +145,9 @@
                         <li>
                             <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
                         </li>
-                        <li class="divider"></li>
+                        <li class="divider"></li> -->
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="<?php echo $this->url("sales",array("controller"=>"index","action"=>"logout"))?>"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -158,6 +158,9 @@
                     <li class="active">
                         <a href="<?php echo $this->url('sales')?>"><i class="fa fa-fw fa-dashboard"></i> Sales Home</a>
                     </li>
+                    <?php
+                        if($this->empDetails->roleId ==0){
+                    ?>
                     <li>
                         <a href="<?php echo $this->url("roles",array("action"=>"index"))?>"><i class="fa fa-fw fa-bar-chart-o"></i> Roles</a>
                     </li>
@@ -167,6 +170,7 @@
                     <li>
                         <a href="<?php echo $this->url("cust",array("action"=>"index"))?>"><i class="fa fa-fw fa-edit"></i> Customers</a>
                     </li>
+                    <?php }?>
 
                 </ul>
             </div>

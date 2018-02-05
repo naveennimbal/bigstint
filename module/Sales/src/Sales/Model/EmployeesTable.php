@@ -21,34 +21,84 @@ class EmployeesTable
 
 
     public function fetchAll($paginated=false) {
-        echo "mod"; exit;
+        //echo "mod"; exit;
 
         $sql = new Sql($this->tableGateway->adapter);
         $select = $sql->select();
+        //$select->from($this->tableGateway->getTable());
         $select->from($this->tableGateway->getTable());
-        $select->order('image_id DESC');
+        $select->order('dateAdded DESC');
         //$select->join('role', 'user.role_id = role.id', array('role' => 'name'));
         //$select->join('group', 'user.group_id = group.id', array('group' => 'name'));
+        //$select = "SELECT employees.*,roles.roleName FROM employees,roles where employees.roleId=roles.roleId";
+        //var_dump($select); exit;
+
+
 
         if ($paginated) {
+            //echo "hhh"; exit;
             $dbTableGatewayAdapter = new DbSelect($select, $sql);
+            //var_dump($dbTableGatewayAdapter->count()); exit;
             //$dbTableGatewayAdapter = new DbTableGateway($this->tableGateway);
+
             $paginator = new Paginator($dbTableGatewayAdapter);
+
+
+            //var_dump($paginator->getCurrentItemCount()); exit;
+
             return $paginator;
         }
 
-        $resultSet = $this->tableGateway->selectWith($select);
+        $resultSet = $this->tableGateway->getAdapter()->driver->getConnection()->execute($select);
 
         return $resultSet;
+
+       // $resultSet = $this->tableGateway->getAdapter()->driver->getConnection()->execute($sqlString);
+
+
     }
 
     public function getTeamLeaders(){
         $sql = new Sql($this->tableGateway->adapter);
         $select = $sql->select();
         $select->from($this->tableGateway->getTable());
+        $select->where(array("roleId"=>"2"));
        // $where = new Where();
        // $where->equalTo("parentId","0");
        // $select->where($where);
+       // var_dump($select->getSqlString()); exit;
+
+        $resultSet = $this->tableGateway->selectWith($select);
+
+        return $resultSet;
+
+    }
+
+    public function getUpsellers(){
+        $sql = new Sql($this->tableGateway->adapter);
+        $select = $sql->select();
+        $select->from($this->tableGateway->getTable());
+        $conditions = array('roleId' => '3', 'roleId' => '2');
+        $select->where->in('roleId',array(3, 2));
+        //$select->where($conditions, \Zend\Db\Sql\Predicate\PredicateSet::);
+        //echo $select->getSqlString(); exit;
+
+        $resultSet = $this->tableGateway->selectWith($select);
+
+        return $resultSet;
+
+    }
+
+
+    public function getAgents(){
+        $sql = new Sql($this->tableGateway->adapter);
+        $select = $sql->select();
+        $select->from($this->tableGateway->getTable());
+        $select->where(array("roleId"=>"1"));
+        // $where = new Where();
+        // $where->equalTo("parentId","0");
+        // $select->where($where);
+        // var_dump($select->getSqlString()); exit;
 
         $resultSet = $this->tableGateway->selectWith($select);
 
@@ -59,13 +109,19 @@ class EmployeesTable
 
     public function save($data)
     {
+        //var_dump($data); exit;
 
         $Sqldata = array(
 
             'empId'=>$data->empId,
+            'roleId'=>$data->roleId,
+            'parentId'=>$data->parentId,
             'name'=>$data->name,
             'mobile'=>$data->mobile,
             'email'=>$data->email,
+            'target'=>$data->target,
+            'pending'=>$data->pending,
+            'completed'=>$data->completed,
             'salary'=>$data->salary,
             'status'=>$data->status,
             'dateAdded'=>$data->dateAdded,
@@ -86,6 +142,9 @@ class EmployeesTable
             'name'=>$data->name,
             'mobile'=>$data->mobile,
             'email'=>$data->email,
+            'target'=>$data->target,
+            'pending'=>$data->pending,
+            'completed'=>$data->completed,
             'salary'=>$data->salary,
             'status'=>$data->status,
             'dateAdded'=>$data->dateAdded,
@@ -114,13 +173,46 @@ class EmployeesTable
 
 
 
-    public function getUserDetails($userId){
+    public function getEmpDetailsById($empId){
         $sql = new Sql($this->tableGateway->adapter);
         $select = $sql->select();
         $select->from($this->tableGateway->getTable());
-        $select->where(array("userId"=>$userId));
+        $select->where(array("empId"=>$empId));
         $resultSet = $this->tableGateway->selectWith($select);
         return  $resultSet->current();
+    }
+
+
+
+
+    public function getEmpDetails($mobileOrEmail){
+        $sql = new Sql($this->tableGateway->adapter);
+        $select = $sql->select();
+        $select->from($this->tableGateway->getTable());
+        if (filter_var($mobileOrEmail, FILTER_VALIDATE_EMAIL)) {
+            $select->where(array("email"=>$mobileOrEmail));
+        } else {
+            $select->where(array("mobile"=>$mobileOrEmail));
+        }
+
+        $resultSet = $this->tableGateway->selectWith($select);
+        return  $resultSet->current();
+    }
+
+
+    public function getEmpLogin($mobileOrEmail,$password){
+        $sql = new Sql($this->tableGateway->adapter);
+        $select = $sql->select();
+        $select->from($this->tableGateway->getTable());
+        if (filter_var($mobileOrEmail, FILTER_VALIDATE_EMAIL)) {
+            $select->where(array("email"=>$mobileOrEmail,"passwd"=>$password));
+        } else {
+            $select->where(array("mobile"=>$mobileOrEmail,"passwd"=>$password));
+        }
+        //echo $select->getSqlString(); exit;
+
+        $resultSet = $this->tableGateway->selectWith($select);
+        return  $resultSet;
     }
 
 

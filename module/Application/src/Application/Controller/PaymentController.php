@@ -540,7 +540,7 @@ class PaymentController extends AbstractActionController{
     private function genrateOrderId(){
         $paymentId = $this->getPaymentTable()->getLastPaymentId();
         //var_dump($paymentId['paymentId']); exit;
-        $orderId = "J2N";
+        $orderId = "JNN";
         $orderId .= "-".date('dmY');
         $orderId .= "-".$paymentId['paymentId'];
 

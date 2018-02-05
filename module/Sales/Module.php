@@ -9,6 +9,10 @@ use Sales\Model\Customer;
 use Sales\Model\CustomerTable;
 use Sales\Model\Employees;
 use Sales\Model\EmployeesTable;
+use Sales\Model\Roles;
+use Sales\Model\RolesTable;
+use Sales\Model\Sales;
+use Sales\Model\SalesTable;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Zend\Session\Config\SessionConfig;
@@ -28,6 +32,7 @@ class Module
 
         $eventManager = $e->getApplication()->getEventManager();
         $eventManager->attach('dispatch', array($this, 'loadConfiguration' ));
+
         $eventManager->getSharedManager()->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e) {
             $controller = $e->getTarget();
             $controllerClass = get_class($controller);
@@ -39,6 +44,7 @@ class Module
                 $controller->layout($config['module_layouts'][$moduleNamespace]);
             }
         }, 100);
+
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
 
@@ -47,6 +53,7 @@ class Module
             'use_cookies' => true,
             'cookie_httponly' => true,
         ));
+        //$this->loadConfiguration($e);
     }
 
     public function initSession($config){
@@ -76,10 +83,27 @@ class Module
 
     public function loadConfiguration(MvcEvent $e)
     {
-        $user_session = new Container('user');
-        $username = $user_session->name;
+       // $user_session = new Container('emp');
+        //$empDetails = $user_session->empDetails;
         $controller = $e->getTarget();
-        $controller->layout()->name = $username;
+        //$controller->layout()->name = $empDetails->name;
+
+        $empSession = new Container('emp');
+        $empDetails = $empSession->empDetails;
+         //var_dump($empDetails); exit;
+
+        if ($empSession->offsetExists('roleName')){
+            //echo "we are looged in "; exit;
+            //$this->layout()->name= $empSession->name;
+            // var_dump($empDetails); exit;
+            $controller->layout()->setVariable("empName",$empDetails->name);
+            $controller->layout()->setVariable("name",$empDetails->name);
+            $controller->layout()->setVariable("empDetails",$empDetails);
+            $controller->layout()->setVariable("roleName",$empSession->roleName);
+            $controller->layout()->empDet = $empDetails;
+
+
+        }
     }
 
 

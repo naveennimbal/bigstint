@@ -6,50 +6,156 @@
         </h1>
         <ol class="breadcrumb">
             <li class="active">
-                <i class="fa fa-dashboard"></i> All Sales
+                <i class="fa fa-dashboard"></i> Add a Sale
             </li>
         </ol>
+
+        <div class="row">
+            <?php
+            //$det =  $this->empDetails;
+            // var_dump($name); exit;
+
+            if (isset($result)) {
+            //var_dump($result['fail']); exit;
+            if ($result['success'] != "") {
+                ?>
+                <div class="alert alert-success">
+                    <strong>Success!</strong> <?php echo $result['success'] ?>
+                </div>
+
+                <?php
+            }
+            if (is_array($result['fail'])) {
+            ?>
+            <div class="alert alert-danger">
+                <strong>Error!</strong>
+                <?php if (is_array($result['fail'])) {
+                    ?>
+                    <ul>
+                        <?php
+                        foreach ($result['fail'] as $msg) {
+                            echo "<li>" . $msg . "</li>";
+                        }
+                        ?>
+                    </ul>
+                    <?php
+                }
+                }
+
+                if($result['fail']!="")
+                {
+                ?>
+                <div class="alert alert-danger">
+                    <strong>Error!</strong>
+                    <?php
+                    echo (!is_array($result['fail']))? $result['fail']:"";
+
+                    ?>
+                </div>
+
+                    <?php
+                }
+
+
+
+
+
+                ?>
+
+
+
+
+                <?php
+
+                }
+            ?>
+            </div>
+
+
+        </div>
+
     </div>
 </div>
 <!-- /.row -->
 
 
-
 <div class="row">
     <div class="col-lg-12 col-md-6">
 
-        <form role="form" method="post" id="confirmPaymentForm" action="<?php echo  $this->url("sales",array("controller"=>"index","action"=>"confirm")) ?>">
+        <form role="form" method="post" id="addSaleForm"
+              action="<?php echo $this->url("sales", array("controller" => "index", "action" => "add")) ?>">
 
-            <div class="col-lg-10">
+            <div class="col-lg-12">
+                <div class="col-lg-6">
 
-                <div class="form-group">
-                    <label>Customer Name</label>
-                    <input class="form-control" type="text" placeholder="Customer Name " name="custName">
+                    <div class="form-group">
+                        <label>Customer Name</label>
+                        <input class="form-control" type="text" placeholder="Customer Name " name="custName"
+                               required="required">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Customer Email</label>
-                    <input class="form-control" type="text" placeholder="Customer Email " name="custEmail">
-                </div>
-
-                <div class="form-group">
-                    <label>Customer Mobile</label>
-                    <input class="form-control" type="text" placeholder="Customer Name " name="custMobile">
-                </div>
-
-                <div class="form-group">
-                    <label>Amount</label>
-                    <input class="form-control" type="text" placeholder="Amount " name="amount">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Customer Email</label>
+                        <input class="form-control" type="text" placeholder="Customer Email " name="custEmail"
+                               required="required">
+                    </div>
                 </div>
 
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Customer Mobile</label>
+                        <input class="form-control" type="text" placeholder="Customer Name " name="custMobile"
+                               required="required">
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+
+                    <div class="form-group">
+                        <label>Transaction ID</label>
+                        <input class="form-control" type="text" placeholder="Transaction ID " name="transId"
+                               required="required">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+
+                    <div class="form-group">
+                        <label>Select Gateway</label>
+                        <select class="form-control" name="gateway" required="required">
+                            <option value="">Select Gateway</option>
+                            <option value="Paynear">Paynear</option>
+                            <option value="Paytm">Paytm</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+
+                    <div class="form-group">
+                        <label>Is it a Fresh Sale ?</label>
+                        <select class="form-control" name="isFresh" required="required">
+                            <option value="">Choose Yes or NO</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+
+                        </select>
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-lg-11">
                 <div class="form-group">
                     <label>Service Enrolled </label>
                     <select class="form-control" name="services[]" multiple="multiple" id="services">
-                        <option value=""> Select Services</option>
+
                         <?php
-                        foreach ($services as $service){
+                        foreach ($services as $service) {
                             ?>
-                            <option value="<?php echo $service['id'] ?>"> <?php echo ucfirst($service['name'])?></option>
-                        <?php
+                            <option value="<?php echo $service['id'] ?>"> <?php echo ucfirst($service['name']) ?></option>
+                            <?php
                         }
                         ?>
 
@@ -57,18 +163,72 @@
 
 
                 </div>
+                </div>
+
+                <?php
+                if(isset($agentId)){
+                    echo "<input type='hidden' name='agent' value='".$agentId."'>";
+
+                } else {
+                ?>
+
+                <div class="col-lg-6">
+
+                    <div class="form-group">
+                        <label>Agent</label>
+                        <select class="form-control" name="agent">
+                            <option value=""> Select Agent</option>
+                            <?php
+                            foreach ($agents as $agent) {
+                                ?>
+                                <option value="<?php echo $agent['id'] ?>"> <?php echo ucfirst($agent['name']) ?></option>
+                                <?php
+                            }
+                            ?>
+
+                        </select>
+
+                    </div>
+                </div>
+
+                <?php } ?>
+
+                <div class="col-lg-6">
+
+                    <div class="form-group">
+                        <label>Upseller</label>
+                        <select class="form-control" name="upseller">
+                            <option value=""> Select Upseller</option>
+                            <?php
+                            foreach ($upsellers as $upseller) {
+                                ?>
+                                <option value="<?php echo $upseller['id'] ?>"> <?php echo ucfirst($upseller['name']) ?></option>
+                                <?php
+                            }
+                            ?>
+
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
 
                 <div class="form-group">
-                    <label>Agent</label>
-                    <input class="form-control" type="text" placeholder="Amount " name="Agent">
+                    <label>Amount</label>
+                    <input class="form-control" type="text" placeholder="Amount " name="amount" required>
+                </div>
+                </div>
+
+                <div class="col-lg-6">
+
+                <div class="form-group">
+                    <input type="submit" value="Add A Sale" class="btn btn-primary">
+                </div>
                 </div>
 
 
-
-
-
             </div>
-
 
 
         </form>
@@ -77,70 +237,7 @@
     </div>
 
 
-
 </div>
 <!-- /.row -->
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Sale Search List </h3>
-            </div>
-
-
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Mobile</th>
-                        <th>Date Time </th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    <?php
-                    // if($result->count() > 0) {
-                    foreach ($result as $res) {
-                        var_dump($res); exit;
-                        ?>
-
-                        <tr class="active">
-                            <td>Atul Walkar</td>
-                            <td>shrawan.walkar@gmail.com</td>
-                            <td>99225515752 9595674545</td>
-                            <td>29/07/2016 <br>30/07/2016</td>
-                            <td>Active</td>
-                        </tr>
-
-
-                        <?php
-                    }
-                    // } else
-                    {
-                        ?>
-
-                        <tr class="active">
-                            <td colspan="5">Nothing Found</td>
-
-                        </tr>
-
-                        <?php
-                    }
-
-                    ?>
-
-
-                    </tbody>
-                </table>
-
-
-
-            </div>
-        </div>
-    </div>
-    <!-- /.row -->
 

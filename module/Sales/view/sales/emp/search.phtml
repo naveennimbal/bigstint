@@ -32,7 +32,7 @@
 
                     <div class="form-group">
                         <label>Employee Mobile</label>
-                        <input class="form-control" type="text" placeholder="Employee Mobile" id="mobile">
+                        <input class="form-control" type="text" placeholder="Employee Mobile" name="mobile">
 
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                         <tr>
-                            <th>Customer Name</th>
+                            <th>Name</th>
                             <th>Role</th>
                             <th>Target</th>
                             <th>Salary </th>
@@ -86,10 +86,11 @@
                         <tbody>
 
                         <?php
-                        echo "kkk";
-                       // if($result->count() > 0) {
-                            foreach ($paging as $emp) {
-                                var_dump($emp); exit;
+                        //var_dump($result); exit;
+                        if($count > 0) {
+                            //foreach ($result as $emp) {
+                                //var_dump($result); exit;
+                                $emp = $result;
                                 ?>
 
                                 <tr class="">
@@ -117,7 +118,19 @@
 
                                 <?php
 
+                        //}
+                        }else {
+                            ?>
+                            <tr>
+
+                                <td colspan="4"> No employee found</td>
+
+                            </tr>
+
+
+                        <?php
                         }
+
                         ?>
 
 

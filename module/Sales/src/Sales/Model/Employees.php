@@ -24,9 +24,14 @@ class Employees implements InputFilterAwareInterface
 
     protected $inputFilter;
     public $empId;
+    public $roleId;
     public $name;
     public $mobile;
     public $email;
+    public $target;
+    public $pending;
+    public $completed;
+
     public $salary;
     public $status;
     public $dateAdded;
@@ -36,9 +41,13 @@ class Employees implements InputFilterAwareInterface
     public function exchangeArray($data)
     {
         $this->empId = (isset($data['empId'])) ? $data['empId'] : null;
+        $this->roleId = (isset($data['roleId'])) ? $data['roleId'] : null;
         $this->name = (isset($data['name'])) ? $data['name'] : null;
         $this->mobile = (isset($data['mobile'])) ? $data['mobile'] : null;
         $this->email = (isset($data['email'])) ? $data['email'] : null;
+        $this->target = (isset($data['target'])) ? $data['target'] : null;
+        $this->pending = (isset($data['pending'])) ? $data['pending'] : null;
+        $this->completed = (isset($data['completed'])) ? $data['completed'] : null;
         $this->salary = (isset($data['salary'])) ? $data['salary'] : null;
         $this->status = (isset($data['status'])) ? $data['status'] : null;
         $this->dateAdded = (isset($data['dateAdded'])) ? $data['dateAdded'] : date('Y-M-d H:i:s');

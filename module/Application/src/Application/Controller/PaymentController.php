@@ -49,6 +49,8 @@ class PaymentController extends AbstractActionController{
 
         $request = $this->getRequest();
         if($request->isPost()){
+
+            var_dump($request->getpost());
             // complete the login process
             $user = $request->getPost('username');
             $pass = $request->getPost('password');

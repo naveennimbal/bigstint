@@ -169,6 +169,17 @@ class EmployeesTable
         //var_dump($product); exit;
     }
 
+    public function updatePassword($data){
+        $Sqldata = array(
+            'empId'=>$data->empId,
+            'passwd'=>$data->passwd,
+
+        );
+        //print_r($Sqldata); exit;
+        return $this->tableGateway->update($Sqldata,array('empId'=>$data->empId));
+
+    }
+
 
 
 

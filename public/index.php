@@ -1,7 +1,7 @@
 <?php
 define("BASEURL", "http://".$_SERVER['SERVER_NAME']);
 
-define('PAYTM_ENVIRONMENT', 'DEV'); // PROD
+define('PAYTM_ENVIRONMENT', 'PROD'); // PROD
 
 
 
@@ -12,9 +12,16 @@ if (PAYTM_ENVIRONMENT == 'PROD') {
 
 if (PAYTM_ENVIRONMENT == 'PROD') {
     $PAYTM_DOMAIN = 'secure.paytm.in';
-    define('PAYTM_MERCHANT_KEY', 'T0xK5aXDPpdlJgiv'); //Change this constant's value with Merchant key downloaded from portal
-    define('PAYTM_MERCHANT_MID', 'KRoutS01321525245753'); //Change this constant's value with MID (Merchant ID) received from Paytm
-    define('PAYTM_MERCHANT_WEBSITE', 'KRoutSWEB'); //Change this constant's value with Website name received from Paytm
+    //define('PAYTM_MERCHANT_KEY', 'T0xK5aXDPpdlJgiv'); //Change this constant's value with Merchant key downloaded from portal
+    //define('PAYTM_MERCHANT_MID', 'KRoutS01321525245753'); //Change this constant's value with MID (Merchant ID) received from Paytm
+    //define('PAYTM_MERCHANT_WEBSITE', 'KRoutSWEB'); //Change this constant's value with Website name received from Paytm
+    //define('INDUSTRY_TYPE_ID', 'Retail109'); //Change this constant's value with Website name received from Paytm
+    //define('CHANNEL_ID', 'WEB'); //Change this constant's value with Website name received from Paytmdefine
+    //
+    // this is for peerless
+    define('PAYTM_MERCHANT_KEY', 'bcrlF3eT14az5Y30'); //Change this constant's value with Merchant key downloaded from portal
+    define('PAYTM_MERCHANT_MID', 'peerll78705131076019'); //Change this constant's value with MID (Merchant ID) received from Paytm
+    define('PAYTM_MERCHANT_WEBSITE', 'peerleWEB'); //Change this constant's value with Website name received from Paytm
     define('INDUSTRY_TYPE_ID', 'Retail109'); //Change this constant's value with Website name received from Paytm
     define('CHANNEL_ID', 'WEB'); //Change this constant's value with Website name received from Paytm
 

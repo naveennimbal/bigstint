@@ -388,4 +388,58 @@ class IndexController extends AbstractActionController
         return new ViewModel(array("result"=>$result,"count"=>$count));
 
     }
+
+
+    public function changepasswordAction(){
+        $result ="";
+        $request = $this->getRequest();
+        if($request->isPost()){
+           // print_r($request->getPost()); exit;
+            $empSession = new Container('emp');
+            //var_dump($empSession->empDetails); exit;
+            $agentId = $empSession->empDetails->empId;
+            $passwd = $empSession->empDetails->passwd;
+            $newpwd = $request->getPost('newpwd');
+            $conpwd = $request->getPost('conpwd');
+            $currpwd = $request->getPost('currpwd');
+            //echo md5(trim($currpwd)); exit();
+            if($passwd == md5($currpwd)){
+                if(trim($newpwd)==trim($conpwd)){
+                    // update password here
+                    //echo $newpwd; exit;
+                    $passwdUpdate = md5(trim($newpwd));
+                    $data = array();
+                    $data['empId']=$agentId;
+                    $data['passwd']=$passwdUpdate;
+                    $data = (object)$data;
+
+                    $update = $this->getEmpTable()->updatePassword($data);
+                    if($update){
+                        $empSession->empDetails->passwd = $passwdUpdate;
+                        $result['status'] = "success";
+                        $result['msg'] = "Password Updated Successfully ";
+                    } else {
+                        $result['status'] = "fail";
+                        $result['msg'] = "Something went wrong";
+                    }
+
+
+                } else {
+                    $result['status'] = "fail";
+                    $result['msg'] = "Password do not match ";
+                }
+
+            } else {
+                $result['status'] = "fail";
+                $result['msg'] = "Incorrect Current Password ";
+            }
+            return new ViewModel(array("result"=>$result));
+
+        }
+        return new ViewModel(array("result"=>$result));
+
+
+    }
+
+
 }

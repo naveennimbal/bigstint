@@ -27,6 +27,7 @@ class Employees implements InputFilterAwareInterface
     public $roleId;
     public $name;
     public $mobile;
+    public $passwd;
     public $email;
     public $target;
     public $pending;
@@ -45,6 +46,7 @@ class Employees implements InputFilterAwareInterface
         $this->name = (isset($data['name'])) ? $data['name'] : null;
         $this->mobile = (isset($data['mobile'])) ? $data['mobile'] : null;
         $this->email = (isset($data['email'])) ? $data['email'] : null;
+        $this->passwd = (isset($data['passwd'])) ? $data['passwd'] : null;
         $this->target = (isset($data['target'])) ? $data['target'] : null;
         $this->pending = (isset($data['pending'])) ? $data['pending'] : null;
         $this->completed = (isset($data['completed'])) ? $data['completed'] : null;
